@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html>
+<style>
+  body {
+      font-size: 16px;
+      color: black;
+      background-color: rgba(0,0,0,0);
+  }
+  p {
+   font-size: 24px;
+   color: black;
+  }
+</style>
+
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<body>
+  <p> Debit </p>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLScJdOQu1yMm8yzd-nkPG9_eR7e3RAEK7FQXZcdE71JFZJpOMw/formResponse" method="POST" target="hidden_iframe">
+    <table>
+      <tr>
+        <td>Date: </td>
+        <td><input type="date" aria-describedby="i.desc.1475551574 i.err.1475551574" name="entry.1927614168"></td>
+      </tr>
+      <tr>
+        <td>Amount: </td>
+        <td><input type="number" aria-describedby="i.desc.2058196730 i.err.2058196730" name="entry.1733210272" step=0.01></td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td><input input="text" aria-describedby="i.desc.1463461787 i.err.1463461787" name="entry.618983115"> </td>
+      </tr>
+      <tr>
+        <td>Card: </td>
+        <td><select aria-describedby="i.desc.863571778 i.err.863571778" name="entry.1263465210">
+          <option value="double"> </option>
+          <option value="mchase"> Chase Debit (MM) 0010 </option>
+          <option value="gchase"> Chase Debit (GG) 9832 </option>
+          <option value="free"> Chase Freedom 1653 </option>
+          <option value="limit"> Chase Freedom Unlimited 3308 </option>
+          <option value="csr"> Chase Sapphire Reserve 5592 </option>
+          <option value="citi"> Citi Debit 9869 </option>
+          <option value="double"> Citi Double Cash 6425 </option>
+          <option value="green"> Citi Forward 9856 </option>
+          <option value="it"> Discover It 1979 </option>
+          <option value="tcf"> TCF Bank 3930 </option>
+          <option value="us"> US Bank </option>
+        </select></td>
+        <td> Default: double </td>
+      </tr>
+      <tr>
+        <td>Category: </td>
+        <td><select aria-describedby="i.desc.67022864 i.err.67022864" name="entry.1917521587">
+          <option value="grocery"> </option>
+          <option value="basic"> Basic: Rent/Internet/... </option>
+          <option value="dine"> Dine: restaurant/... </option>
+          <option value="grocery"> Grocery: Meijer/Jewel/... </option>
+          <option value="other"> Other: Tuition/Dental/... </option>
+          <option value="shop"> Shop: Cloth/Gift/... </option>
+          <option value="travel"> Travel: Greydog/Parking/... </option>
+          <option value="trip"> Trip: Flight/Hotel/... </option>
+        </select></td>
+        <td> Default: grocery (Meijer/Jewel) </td>
+      </tr>
+      <tr>
+        <td>Note: </td>
+        <td><input type="text" aria-describedby="i.desc.217196899 i.err.217196899" name="entry.1354896065"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="reset" name="reset"></td>
+        <td><input type="submit" name="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+
+  <p> Transfer </p>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLScJdOQu1yMm8yzd-nkPG9_eR7e3RAEK7FQXZcdE71JFZJpOMw/formResponse" method="POST" target="hidden_iframe">
+    <table>
+      <tr>
+        <td>Date: </td>
+        <td><input type="date" aria-describedby="i.desc.1475551574 i.err.1475551574" name="entry.1927614168"></td>
+      </tr>
+      <tr>
+        <td>Amount: </td>
+        <td><input type="number" aria-describedby="i.desc.2058196730 i.err.2058196730" name="entry.1733210272" step=0.01></td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td><input type="text" aria-describedby="i.desc.1463461787 i.err.1463461787" name="entry.618983115"></td>
+      </tr>
+      <tr>
+        <td>From: </td>
+        <td><select aria-describedby="i.desc.863571778 i.err.863571778" name="entry.1263465210">
+          <option value="mchase"> Chase Debit (MM) </option>
+          <option value="gchase"> Chase Debit (GG) </option>
+          <option value="citi"> Citi Debit </option>
+          <option value="tcf"> TCF Bank </option>
+          <option value="us"> US Bank </option>
+        </select></td>
+        <td>To: </td>
+        <td><select aria-describedby="i.desc.217196899 i.err.217196899" name="entry.1354896065">
+          <option value="mchase"> Chase Debit (MM) </option>
+          <option value="gchase"> Chase Debit (GG) </option>
+          <option value="free"> Chase Freedom </option>
+          <option value="limit"> Chase Freedom Unlimited </option>
+          <option value="csr"> Chase Sapphire Reserve </option>
+          <option value="citi"> Citi Debit </option>
+          <option value="double"> Citi Double Cash </option>
+          <option value="green"> Citi Forward </option>
+          <option value="it"> Discover It </option>
+          <option value="tcf"> TCF Bank </option>
+          <option value="us"> US Bank </option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><input type="text" aria-describedby="i.desc.67022864 i.err.67022864" name="entry.1917521587" value="transfer" style="display:none;"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="reset" name="reset"></td>
+        <td><input type="submit" name="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+
+  <p> Credit </p>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLScJdOQu1yMm8yzd-nkPG9_eR7e3RAEK7FQXZcdE71JFZJpOMw/formResponse" method="POST" target="hidden_iframe">
+    <table>
+      <tr>
+        <td>Date: </td>
+        <td><input type="date" aria-describedby="i.desc.1475551574 i.err.1475551574" name="entry.1927614168"></td>
+      </tr>
+      <tr>
+        <td>Amount: </td>
+        <td><input type="number" aria-describedby="i.desc.2058196730 i.err.2058196730" name="entry.1733210272" step=0.01></td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td><input type="text" aria-describedby="i.desc.1463461787 i.err.1463461787" name="entry.618983115"></td>
+      </tr>
+      <tr>
+        <td>Card: </td>
+        <td><select aria-describedby="i.desc.863571778 i.err.863571778" name="entry.1263465210">
+          <option value="mchase"> Chase Debit (MM) </option>
+          <option value="gchase"> Chase Debit (GG) </option>
+          <option value="free"> Chase Freedom </option>
+          <option value="limit"> Chase Freedom Unlimited </option>
+          <option value="csr"> Chase Sapphire Reserve </option>
+          <option value="citi"> Citi Debit </option>
+          <option value="double"> Citi Double Cash </option>
+          <option value="green"> Citi Forward </option>
+          <option value="it"> Discover It </option>
+          <option value="tcf"> TCF Bank </option>
+          <option value="us"> US Bank </option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><input type="text" aria-describedby="i.desc.67022864 i.err.67022864" name="entry.1917521587" value="income" style="display:none;"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="reset" name="reset"></td>
+        <td><input type="submit" name="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+
+
+  <p> Balance Check </p>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLScJdOQu1yMm8yzd-nkPG9_eR7e3RAEK7FQXZcdE71JFZJpOMw/formResponse" method="POST" target="hidden_iframe">
+    <table>
+      <tr>
+        <td>Date: </td>
+        <td><input type="date" aria-describedby="i.desc.1475551574 i.err.1475551574" name="entry.1927614168"></td>
+      </tr>
+      <tr>
+        <td>Balance: </td>
+        <td><input type="number" aria-describedby="i.desc.2058196730 i.err.2058196730" name="entry.1733210272" step=0.01></td>
+      </tr>
+      <tr>
+        <td>Card: </td>
+        <td><select aria-describedby="i.desc.863571778 i.err.863571778" name="entry.1263465210">
+          <option value="mchase"> Chase Debit (MM) </option>
+          <option value="gchase"> Chase Debit (GG) </option>
+          <option value="free"> Chase Freedom </option>
+          <option value="limit"> Chase Freedom Unlimited </option>
+          <option value="csr"> Chase Sapphire Reserve </option>
+          <option value="citi"> Citi Debit </option>
+          <option value="double"> Citi Double Cash </option>
+          <option value="green"> Citi Forward </option>
+          <option value="it"> Discover It </option>
+          <option value="tcf"> TCF Bank </option>
+          <option value="us"> US Bank </option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><input type="text" aria-describedby="i.desc.67022864 i.err.67022864" name="entry.1917521587" value="balance" style="display:none;"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="reset" name="reset"></td>
+        <td><input type="submit" name="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+</html>
