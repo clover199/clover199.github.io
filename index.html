@@ -1,31 +1,76 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  
+
   <head>
     <title>Home - Clover's blog</title>
-    
+
     <!--styles-->
     <link rel="stylesheet" href="./css/index.css">
+    <style>
+      a.link_hide:link {
+          color: white;
+          background-color: transparent;
+          text-decoration: none;
+      }
+      a.link_hide:visited {
+          color: white;
+          background-color: transparent;
+          text-decoration: none;
+      }
+      a.link_hide:hover {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+      }
+      a.link_hide:active {
+          color: blue;
+          background-color: transparent;
+          text-decoration: none;
+      }
+
+      ul.page_head {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333333;
+      }
+      ul.page_head li {
+          float: left;
+      }
+      ul.page_head li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 16px;
+          text-decoration: none;
+      }
+      ul.page_head li a:hover {
+          background-color: #111111;
+      }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  
+
   <body>
-    <h1>This is a heading</h1>
-    <p>This is a paragraph.</p>
-    
-    <br />
-    
-    <a href="projects/parafermion/">
-      <h2> Parafermions </h2>
-    </a>
-    
-    <br/>
-    
-    <p> I lean HTML from <a href="https://www.w3schools.com"> w3schools </a>
-    
-    <a href="personal/">
-      <p style="color:white"> personal <p>
-    </a>
-      
+    <ul class="page_head">
+      <li style="margin:0 0 0 200px"><a href="index.html">Home</a></li>
+      <li><a href="projects/index.html">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div style="margin:0 400px 0 200px">
+      <h1>This is a heading</h1>
+      <p>This is a paragraph.</p>
+
+      <p> I lean HTML from <a href="https://www.w3schools.com"> w3schools </a>
+    </div>
+
+    <a href="personal/index.html" class="link_hide">personal</a>
+
   </body>
 
 </html>
