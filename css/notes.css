@@ -7,7 +7,7 @@
   /* For mobile phones: */
   width: 100%;
 }
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
   /* For tablets: */
   .col-m-1 {width: 8.33%;}
   .col-m-2 {width: 16.66%;}
@@ -22,7 +22,7 @@
   .col-m-11 {width: 91.66%;}
   .col-m-12 {width: 100%;}
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1200px) {
   /* For desktop: */
   .col-1 {width: 8.33%;}
   .col-2 {width: 16.66%;}
@@ -40,7 +40,7 @@
 
 [class*="col-"] {
   float: left;
-  padding: 15px;
+  padding: 10px;
 }
 .row::after {
   content: "";
@@ -59,11 +59,6 @@ nav {
   color: white;
   background-color: #333333;
 }
-nav .list_menue {
-  max-width: 800px;
-  margin: auto;
-  padding: 0;
-}
 nav a {
   color: white;
   display: inline-block;
@@ -77,56 +72,29 @@ nav a:hover {
   background-color: #111111;
   height: 40px;
 }
-nav .menue a {
-  float: left;
-}
-nav .glyphicon {
-  display: none;
-}
 
-@media only screen and (max-width: 479px) {
-  nav .glyphicon {
-    display: inline-block;
-    font-size: 16px;
-    padding: 10px;
-    height: 40px;
-  }
-  nav .menue {
-    display: none;
-    position: absolute;
-    background-color: #333333;
-    z-index: 1;
-  }
-  nav .menue a {
-    clear: both;
-    text-align: left;
-    width: 100%;
-  }
-  nav .list_menue:hover .menue {
-    display: block;
-  }
-}
-
-/* Style for main text/article */
+/* Style for main */
 main {
-  max-width: 800px;
-  margin: auto;
-  padding: 50px 15px 0 15px;
+  padding: 40px 0px 40px 0px;
 }
-main p{
-  font-size: 16px;
-  line-height: 1.8;
+
+strong {
+  color: #0000FF;
 }
-main h1{
-  font-size: 32px;
-  line-height: 1.5;
+
+em {
+  color: #FF00FF;
 }
-main figure {
-  display: block;
-  padding: 5px;
-}
-main figure img{
-  max-width: 320px;
-  max-height: 200px;
-  height: auto
-}
+ /* Style for footer */
+ footer {
+   width: 100%;
+   position: static;
+   bottom: 0;
+   margin: 0;
+   font-size: 12px;
+   padding: 10px;
+   background-color: #FFFFFF;
+ }
+ ul{
+   list-style-type: none;
+ }
