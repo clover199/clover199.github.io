@@ -77,33 +77,33 @@ nav a:hover {
   background-color: #111111;
   height: 40px;
 }
-nav .menue a {
-  float: left;
-}
-nav .glyphicon {
+nav .list_button {
   display: none;
 }
 
 @media only screen and (max-width: 479px) {
-  nav .glyphicon {
+  nav .list_button {
     display: inline-block;
     font-size: 16px;
     padding: 10px;
     height: 40px;
+    background-color: #333333;
+    border: none;
   }
   nav .menue {
     display: none;
+  }
+  nav .menue_show {
+    display: block;
     position: absolute;
     background-color: #333333;
     z-index: 1;
   }
-  nav .menue a {
+  nav a {
+    display: block;
     clear: both;
     text-align: left;
     width: 100%;
-  }
-  nav .list_menue:hover .menue {
-    display: block;
   }
 }
 

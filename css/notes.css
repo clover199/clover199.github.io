@@ -7,7 +7,22 @@
   /* For mobile phones: */
   width: 100%;
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 640px) {
+  /* For mini: */
+  .col-mm-1 {width: 8.33%;}
+  .col-mm-2 {width: 16.66%;}
+  .col-mm-3 {width: 25%;}
+  .col-mm-4 {width: 33.33%;}
+  .col-mm-5 {width: 41.66%;}
+  .col-mm-6 {width: 50%;}
+  .col-mm-7 {width: 58.33%;}
+  .col-mm-8 {width: 66.66%;}
+  .col-mm-9 {width: 75%;}
+  .col-mm-10 {width: 83.33%;}
+  .col-mm-11 {width: 91.66%;}
+  .col-mm-12 {width: 100%;}
+}
+@media only screen and (min-width: 960px) {
   /* For tablets: */
   .col-m-1 {width: 8.33%;}
   .col-m-2 {width: 16.66%;}
@@ -22,7 +37,7 @@
   .col-m-11 {width: 91.66%;}
   .col-m-12 {width: 100%;}
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1280px) {
   /* For desktop: */
   .col-1 {width: 8.33%;}
   .col-2 {width: 16.66%;}
@@ -40,7 +55,7 @@
 
 [class*="col-"] {
   float: left;
-  padding: 10px;
+  padding: 5px;
 }
 .row::after {
   content: "";
@@ -76,6 +91,7 @@ nav a:hover {
 /* Style for main */
 main {
   padding: 40px 0px 40px 0px;
+  clear: both;
 }
 
 strong {
@@ -85,16 +101,19 @@ strong {
 em {
   color: #FF00FF;
 }
+
+.note {
+  color: #009900;
+}
+
  /* Style for footer */
- footer {
-   width: 100%;
-   position: static;
-   bottom: 0;
-   margin: 0;
-   font-size: 12px;
-   padding: 10px;
-   background-color: #FFFFFF;
- }
- ul{
-   list-style-type: none;
- }
+footer {
+ width: 100%;
+ float: left;
+ bottom: 0;
+ margin: 0;
+ font-size: 12px;
+ padding: 10px;
+ border-top: solid black;
+ background-color: #FFFFFF;
+}
