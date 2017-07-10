@@ -43,7 +43,7 @@
   <main>
     <section>
     <h1> Mean Field Theory and Boltzmann Machine</h1>
-      <time> 07-04-2017 </time>
+      <time> 07-09-2017 </time>
       <p>
         In classical statistics, we treat a physical system as an ensemble of
         elementary particles. For example, a magnet can be described by spins from iron ions.
@@ -236,10 +236,11 @@
       <p>
         Expand \(G(\mathbf{m})\) near \(\beta=0\) and replace \(\lambda_i\) calculated from constraints,
         we get the terms untill the second order of \(\beta\)
-        $$ \beta G_0(\mathbf{m}) = \sum_i \left[ \frac{1+m_i}{2} \ln \left(\frac{1+m_i}{2}\right) +
-        \frac{1-m_i}{2} \ln \left(\frac{1-m_i}{2}\right)\right] $$
-        $$ \beta G_1(\mathbf{m}) = - \sum_{i,j} J_{ij} m_i m_j $$
-        $$ \beta G_2(\mathbf{m}) = - \frac{1}{2} \sum_{i,j} J_{ij}^2(1-m_i^2)(1-m_j^2) $$
+        $$ \begin{split}
+        & \beta G_0(\mathbf{m}) = \sum_i \left[ \frac{1+m_i}{2} \ln \left(\frac{1+m_i}{2}\right) +
+        \frac{1-m_i}{2} \ln \left(\frac{1-m_i}{2}\right)\right] \\
+        & \beta G_1(\mathbf{m}) = - \sum_{i,j} J_{ij} m_i m_j \\
+        & \beta G_2(\mathbf{m}) = - \frac{1}{2} \sum_{i,j} J_{ij}^2(1-m_i^2)(1-m_j^2) \end{split}$$
         All these terms add up to the Thouless-Anderson-Palmer (TAP) expansion
         $$ \begin{split}
         G_{\mathrm{TAP}} = & - \sum_{(i,j)} J_{ij} m_i m_j - \frac{1}{2T} \sum_{(i,j)} J_{ij}^2(1-m_i^2)(1-m_j^2) \\
