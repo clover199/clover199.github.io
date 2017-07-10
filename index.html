@@ -1,16 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
+
   <head>
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home - Clover's blog</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="./css/index.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script src="script.js"></script>
   </head>
 
   <body>
 
-    <h1>This is a Heading</h1>
-    <p>This is a paragraph.</p>
-    <p style="font-size:16px">This is font size 16px.</p>
-    <p style="font-size:24px">This is font size 24px.</p>
+  <header> </header>
 
+  <nav>
+    <button class="list_button" onclick="show_nav_bar()"> <i class="glyphicon glyphicon-list"></i> </button>
+    <a href="notes/index.html" style="color:#333333;float:right;">notes</a>
+    <div id="navlist" class="menue">
+      <a href="index.html">Home</a>
+      <a href="projects/index.html">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+
+    <p> I lean HTML from <a href="https://www.w3schools.com"> w3schools </a>
+  </main>
   </body>
+
 </html>
