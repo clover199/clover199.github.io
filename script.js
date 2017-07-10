@@ -1,3 +1,8 @@
 function show_nav_bar() {
-   document.getElementById("navlist").className = "menue_show";
+    var x = document.getElementById('navlist');
+    if (x.className === 'menue') {
+      x.className = 'menue_show';
+    } else {
+      x.className = 'menue';
+    }
 }

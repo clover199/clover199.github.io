@@ -94,6 +94,14 @@ main {
   clear: both;
 }
 
+img {
+   max-width: 300px;
+}
+
+td {
+  text-align: center;
+}
+
 strong {
   color: #0000FF;
 }

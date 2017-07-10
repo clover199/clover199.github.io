@@ -59,7 +59,12 @@ nav {
   color: white;
   background-color: #333333;
 }
-nav .list_menue {
+nav .menue {
+  max-width: 800px;
+  margin: auto;
+  padding: 0;
+}
+nav .menue_show {
   max-width: 800px;
   margin: auto;
   padding: 0;
@@ -99,7 +104,7 @@ nav .list_button {
     background-color: #333333;
     z-index: 1;
   }
-  nav a {
+  nav .menue_show a {
     display: block;
     clear: both;
     text-align: left;
@@ -129,4 +134,27 @@ main figure img{
   max-width: 320px;
   max-height: 200px;
   height: auto
+}
+main table {
+  margin: 10px;
+  font-size: 16px;
+}
+main table th {
+  background-color: #DDDDDD;
+  border: solid;
+  padding: 5px;
+}
+main table td {
+  border: solid;
+  padding: 5px;
+}
+main .notebox {
+  clear: right;
+  background-color: #EEEEEE;
+  margin: 20px;
+  padding: 10px;
+  float: right;
+  max-width: 400px;
+  box-shadow: 5px 5px #999999;
+  font-size: 16px;
 }
