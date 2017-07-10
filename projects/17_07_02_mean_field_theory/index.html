@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Clover's Project - Mean Field Theory and Boltzmann Machine </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet", href="../../css/index.css"/>
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 90
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <!--scripts-->
+    <script src="../../script.js"></script>
+    </style>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <button class="list_button" onclick="show_nav_bar()"> <i class="glyphicon glyphicon-list"></i> </button>
+    <div id="navlist" class="menue">
+      <a href="../../index.html">Home</a>
+      <a href="../index.html">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section>
+    <h1> Mean Field Theory and Boltzmann Machine</h1>
+      <time> 07-09-2017 </time>
+      <p>
+        In classical statistics, we treat a physical system as an ensemble of
+        elementary particles. For example, a magnet can be described by spins from iron ions.
+        The probability distribution of states of the system is given by Boltzmann distribution
+        $$ P(\mathbf{X}) = \frac{1}{Z} e^{-\beta E(\mathbf{X})}. $$
+        Here we use vector \(\mathbf{X}\) to denote states. \(E(\mathbf{X})\) is energy of given states.
+        \(Z=\sum_{\mathbf{X}} e^{-\beta E(\mathbf{X})} \) is a normalization factor
+        and \(\beta=1/T\) with \(T\) as temperature.
+      </p>
+      <figure>
+        <img src="figs/network.png" alt="network" style="float:right;"/>
+      </figure>
+      <p>
+        In the language of computer science and statistics, the vector \(\mathbf{X}\)
+        is a vector of random variables. The Boltzmann distribution is their joint distribution.
+        Such kind of network is called <em>Boltzmann machine</em>
+        (<a href="https://en.wikipedia.org/wiki/Boltzmann_machine">wiki</a>). It is a type of
+        <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random field</a>,
+        in which a variable is conditionally independent
+        of all other variables given its neighbors (Local Markov property).
+        Particularly, for Boltzmann machine we have \(x_i\in\{\pm1\}\) and energy
+        $$ E = -\sum_{i,j} J_{ij} x_i x_j - \sum_i h_i x_i $$
+        It makes Boltzmann machine identical to a spin model in external fields.
+      </p>
+      <p>
+        Although we have the analytic form of the joint distribution, it is still intractable.
+        When calculating expectation values, the number of summation terms increases
+        exponentially with the number of particles (or random variables). We want to
+        use some tractable distributions to approximate the exact distribution.
+      </p>
+      <p>
+        In this post, we will try to find the approximated distributions of Boltzmann distribution.
+        We first introduce naïve mean field theory, then improve it by including corrections.
+        The relationship between TAP, Bethe approximation and Belief propagation are discussed.
+        Since I am a physicist, I will describe from a physics perspective of view.
+        The counterpart from computer science will be put in the shaded box.
+      </p>
+
+      <h2>Gibbs free energy</h2>
+      <p>
+        Note that Boltzmann distribution is the distribution that minimizes Gibbs free energy.
+        Gibbs free energy is defined by
+        $$ G = U - TS = \sum_{\mathbf{X}} P(\mathbf{X}) E(\mathbf{X}) + T \sum_{\mathbf{X}} P (\mathbf{X})\ln P(\mathbf{X})$$
+        Here, \(U\) is the expected energy and \(S\) is entropy of the distribution.
+      </p>
+      <div class="notebox">
+        <p><em>Kullback-Leibler divergence</em> measures the distance of two distributions.
+          $$ \mathrm{KL}(Q||P) = \sum_{\mathbf{X}} Q(\mathbf{X}) \ln \left(\frac{Q(\mathbf{X})}{P(\mathbf{X})}\right) $$
+          choose \(P(\mathbf{X}) = \frac{1}{Z}e^{-E} \) as Boltzmann distribution
+          and \(Q(\mathbf{X})\) as a tractable distribution. We want to find \(Q(\mathbf{X})\) that minimizes KL divergence. </p>
+        <p>Since KL divergence is always non-negative, we get the inequality
+          $$-\ln Z \le \sum_{\mathbf{X}} Q(\mathbf{X})E(\mathbf{X}) -\sum_{\mathbf{X}}- Q(\mathbf{X})\ln Q(\mathbf{X})$$
+          It can be approved by Jenssen's inequality <!--(see appendix B)-->. </p>
+      </div>
+      <p>
+        Now the problem of finding best tractable distributions to approximate Boltzmann distribution
+        becomes finding tractable distributions \(Q(\mathbf{X})\) to minimize Gibbs free energy.
+      </p>
+      <p>
+        For minimization problems with constraint, we must use Lagrange multiplier.
+        Details of the proof can be found in appendix A.
+        The minimum Gibbs free energy is equal to Helmholtz free energy
+        $$ F = -T \ln Z $$
+        The Gibbs free energy calculated using distribution \(Q(\mathbf{X})\) cannot
+        be smaller than \(F\). The closer it is to \(F\) the better the approximation.
+        We can reach the same conclusion using Kullback-Leibler divergence.
+      </p>
+      <p>
+        In the following sections, we will solve \(Q(\mathbf{X})\) with some tractable distributions.
+      </p>
+      <h2> Naïve mean field approximation </h2>
+      <div class="notebox">
+        Naïve Bayesian. </br>
+        Assume all the random variables are independent. The joint distribution
+        is just a product of marginal distributions.
+      </div>
+      <p>
+        The simplest assumption on \(Q(\mathbf{X})\) would be assuming all the spins are
+        in an effective potential.
+        $$ Q(\mathbf{X}) = \prod_j Q_j(x_j)$$
+      </div>
+      <p>
+        Define \(m_i=\sum_{x_i}Q(x_i)x_i\) as magnetization. In the case when \(x_i\in\{\pm 1\}\),
+        we can get the probability from magnetization \(Q(x_i=\pm1)=(1\pm m_i)/2\).
+        If we can get \(m_i\), the distribution \(Q(\mathbf{X})\) will be known.
+        The Gibbs free energy under mean field assumption becomes
+        $$ \begin{split}
+        G_{\mathrm{MF}} = & - \sum_{(i,j)} J_{ij} m_i m_j - \sum_i h_i m_i \\
+        & + T \sum_i \left[ \frac{1+m_i}{2} \ln \left(\frac{1+m_i}{2}\right) +
+        \frac{1-m_i}{2} \ln \left(\frac{1-m_i}{2}\right)\right]
+        \end{split}$$
+        By setting first derivative with respect to \(m_i\) as zero and second derivative
+        no less than zero, we get
+        $$ m_i = \tanh \left(\frac{h_i+\sum_j J_{ij}m_j}{T}\right)$$
+        which is not too difficult to solve numerically.
+      </p>
+      <!-- <h3> Field theoretic approach </h3>
+      <p>
+        Add auxiliary field by noting that
+        $$ e^{\frac{1}{2}\sum_{ij} x_i J_{ij} x_j} = \frac{1}{\sqrt{(2\pi)^N\det(J)}} \int \prod_i \mathrm{d}\theta_i\;
+        e^{-\frac{1}{2}\sum_{ij} \theta_i J^{-1}_{ij} \theta_j + \sum_i \theta_i x_i} $$
+        For a high dimensional integral \(\int \mathrm{d}\theta_i e^{\Phi(\mathbf{\theta})}\; \), the main contribution
+        comes from maximum values of \(\Phi\). (<em> Saddle point approximation </em>)
+      </p> -->
+      <h2> Correcting naïve mean field </h2>
+      <h3> Bethe approximation </h3>
+      <div class="notebox">
+        For Markov networks that have a tree-like topology,
+        the Gibbs free energy can be factorized into a form that only depends on
+        one-node and two-node marginal probabilities.
+      </div>
+      <p>
+        We made a strong assumption in naïve mean field theory that all spins
+        are in effective single-particle potentials. Now we weaken the assumption
+        by including two-particle potentials. Then the distribution is of form
+        $$ Q(\mathbf{X}) = \prod_i Q_i^{1-q_i} (x_i) \prod_{i,j} Q_{ij}(x_i,x_j) $$
+        where \(q_i\) is number of spins connected with spin \(i\), i.e. non-zero number of \(J_{ij}\)
+        of fixed \(i\).
+        Here, all the distributions are marginal distributions.
+        The factor \(q_i-1\) is a correction for over counting.
+        Note that this distribution is exact for <a href="https://en.wikipedia.org/wiki/Bethe_lattice">Bethe lattice</a>,
+        which has the same topology with a rooted tree.
+      </p>
+      <p>
+        The Gibbs free energy under this approximation becomes
+        $$ \begin{split}
+        G_{\mathrm{Bethe}} =& - \sum_{i,j} Q_{ij}(x_i,x_j) J_{ij} x_i x_j - \sum_i Q_i(x_i)h_i x_i \\
+        & + T \sum_i (1-q_i) Q(x_i)\ln Q(x_i) + T \sum_{i,j} Q_{ij}(x_i,x_j)\ln Q_{ij}(x_i,x_j)
+        \end{split}$$
+      </p>
+      <div class="notebox">
+        <h3>Belief propagation</h3>
+        <p>
+          Define <em>evidence</em> of node \(i\)
+          $$ \psi_i(x_i) = e^{-E_i(x_i)} $$
+          Define <em>compatibility matrix</em> between connected nodes
+          $$ \psi_{ij} = e^{-E_{ij}(x_i,x_j)+E_i(x_i)+E_j(x_j)} $$
+          Define belief of a single node as
+          $$ b_i(x_i) \propto \psi_i(x_i) \prod_{k\in N(i)} M_{ki}(x_i)$$
+          Define belief of a pair of neighboring nodes as
+          $$ \begin{split}
+          b_{ij}(x_i,x_j) \propto & \psi_{ij}(x_i,x_j) \psi_i(x_i) \psi_j(x_j) \\
+           & \times \prod_{k\in N(i)\backslash j} M_{ki}(x_i)\prod_{l\in N(j)\backslash i} M_{lj}(x_j)
+           \end{split}$$
+          Then \(M_{ij}(x_j)\) is the message that node \(i\) gives node \(j\) about the
+          marginal distribution on node \(j\).
+        </p>
+        <p>
+          The belief propagation algorithm amonts to solve the above message equations iteratively.
+          We can get the beliefs directly from the messages.
+        </p>
+      </div>
+      <p>
+        This is again a constraint minimization problem. After adding Lagrange multipliers,
+        we can get equations for \(Q_i(x_i)\) and \(Q_{ij}(x_i.x_j)\) <!--(details in appendix C)-->
+        $$ Q_i(x_i) = \frac{e^{-E_i(x_i)/T}}{Z_i} \exp\left[\frac{\sum_j \lambda_{ji}(x_i)}{T(1-q_i)}\right] $$
+        $$ Q_{ij}(x_i,x_j) = \frac{e^{-E_{ij}(x_i,x_j)/T}}{Z_{ij}}
+        \exp\left[\frac{\lambda_{ji}(x_i)+ \lambda_{ij}(x_j)}{T}\right] $$
+        where \(E_i(x_i)=-h_i x_i\) and \(E_{ij}(x_i,x_j)=-J_{ij}x_ix_j-h_i x_i-h_j x_j\).
+        The Lagrange multipliers \(\lambda_{ij}\) can be solved applying the marginalization condition
+        \(Q_i(x_i) =\sum_{x_j} Q_{ij}(x_i,x_j)\).
+        We get
+        $$ \lambda_{ij}(x_j) = T \ln \prod_{k\in N(j)} M_{kj}(x_j) $$
+        and
+        $$ M_{ij}(x_j) \propto \sum_{x_i} e^{-[E_ij(x_i,x_j)-E_j(x_j)]/T}\prod_{k\in N(i)} M_{ki}(x_i)$$
+        Here, \(N(i)=\{j|J_{ij}\ne0 \textrm{ or } J_{ji}\ne0\}\) is a set of spins neighboring spin \(i\).
+        These equations can be solved iteratively. The marginal distributions are just
+        belief functions in belief propagation algorithm.
+      </p>
+      <h3> Plefka's expansion </h3>
+      <p>
+        Now we try to get the approximate distributions from another direction. We do not
+        restrict the form of approximate distributions. We add constraints to
+        the exact distribution, then minimize Gibbs free energy with constraints.
+        It is not that straight forward as previous methods, but we will reach the same results.
+      </p>
+      <p>
+        Given a vector \(\mathbf{m}\) with elements \(m_i\), we add constraints to
+        the probability distribution \(Q(\mathbf{X})\)
+        $$ \langle \mathbf{X} \rangle_Q = \mathbf{m} $$
+        The minimization problem with constraints is again solved by using Lagrange multiplier.
+        We want to minimize
+        $$ G(\mathbf{m})= \langle E(\mathbf{X})\rangle_Q - TS[Q] - T\sum_i \lambda_i (\langle x_i \rangle_Q - m_i) $$
+        The last term can be combined into the energy term. Therefore, the minimizing distribution is just
+        $$ Q_{\mathbf{m}}(\mathbf{X}) = \frac{1}{Z} e^{-\beta E(\mathbf{X})+\sum_i \lambda_i (x_i-m_i)} $$
+        where \(\beta=1/T\).
+        Plug in \(Q_{\mathbf{m}}(\mathbf{X})\), we get our Gibbs free energy
+        $$ \beta G(\mathbf{m})= -\ln \sum_{\mathbf{X}}  e^{-\beta E(\mathbf{X})+\sum_i \lambda_i (x_i-m_i)} $$
+      </p>
+      <p>
+        Expand \(G(\mathbf{m})\) near \(\beta=0\) and replace \(\lambda_i\) calculated from constraints,
+        we get the terms untill the second order of \(\beta\)
+        $$ \begin{split}
+        & \beta G_0(\mathbf{m}) = \sum_i \left[ \frac{1+m_i}{2} \ln \left(\frac{1+m_i}{2}\right) +
+        \frac{1-m_i}{2} \ln \left(\frac{1-m_i}{2}\right)\right] \\
+        & \beta G_1(\mathbf{m}) = - \sum_{i,j} J_{ij} m_i m_j \\
+        & \beta G_2(\mathbf{m}) = - \frac{1}{2} \sum_{i,j} J_{ij}^2(1-m_i^2)(1-m_j^2) \end{split}$$
+        All these terms add up to the Thouless-Anderson-Palmer (TAP) expansion
+        $$ \begin{split}
+        G_{\mathrm{TAP}} = & - \sum_{(i,j)} J_{ij} m_i m_j - \frac{1}{2T} \sum_{(i,j)} J_{ij}^2(1-m_i^2)(1-m_j^2) \\
+        & + T \sum_i \left[ \frac{1+m_i}{2} \ln \left(\frac{1+m_i}{2}\right) +
+        \frac{1-m_i}{2} \ln \left(\frac{1-m_i}{2}\right)\right]
+        \end{split}$$
+      </P>
+      <p>
+        This Gibbs free energy is claimed to be exact for <em>Sherrington-Kirpatrick (SK) model</em>.
+        It is an infinite-ranged Ising spin class model with zero external field.
+        The interaction matrix is symmetric and each element \(J_{ij}\) is chosen from normal distribution
+        with variance \(J_0/N\).
+      </p>
+      <p>
+        TAP equation for SK model is
+        $$ \langle S_i\rangle =\tanh \left(\sum_j J_{ij}\langle S_j\rangle -
+        J_0 (1-q) \langle S_i\rangle + h_i \right) $$
+        where \(q=\frac{1}{N} \sum_j (1-\langle S_j\rangle^2)\).
+      </p>
+      <p>
+        Note that TAP approach and belief propagation give rise to the same equations in general.
+      </p>
+      <!-- <p>
+        Suppose the energy has form
+        $$ E = \sum_{i,j} J_{ij}(x_i, x_j) + \sum_i h_i (x_i) $$
+        and the graph of non-zero \(J_{ij}\) forms a tree, i.e. no loops. Then if we remove \(i\),
+        all the corresponding \(j\) nodes are independent. The joint distribution of \(j\) nodes
+        are simply product of their marginal distributions.
+        $$ P_i(x_i) = \sum_{\{x_j\}\backslash x_i} P(x) \propto \sum_{\{x_j\}\backslash x_i} P(x)
+        e^{J_{ij}+h_i} \prod_j P_{ji}(x_j) $$
+      </p> -->
+      <!-- <p>
+        SK model is fully connected. But with sufficient weak correlations, the independence still holds.
+      </p> -->
+    <h2> Appendix </h2>
+    <h4>A: Boltzmann distribution minimizes Gibbs free energy</h4>
+    Suppose \(P\) is a functional of \(\{x_i\}\). We want to minimize
+    $$G = \sum_{\{x_i\}} P E + T \sum_{\{x_i\}} P \ln P$$
+    under constraint \(h = \sum_{\{x_i\}} P -1\). Using Lagrange multiplier, we minimize
+    \(G+\lambda h\) without constraints.
+    The variant of \(G\) under variant of \(P\) is
+    $$E - T (\ln P +1) + \lambda = 0 $$
+    Take derivative with respect to \(\lambda\) gives the original constraint
+    $$ \sum_{\{x_i\}} P = 1 $$
+    Note that \(\delta G =0 \) should be satisfied for all \(\lambda\), we get the constraint
+    $$ \sum_{\{x_i\}} \delta P = 0 $$
+    At minimum, the variance of \(G\) should be zero for all \(\delta P\). Together with the
+    constraint for \(\delta P\), we get
+    $$ \frac{E}{T} + \ln P + \mathrm{const.} = 0 $$
+    Therefore \(\lambda\) contributes to the overall normalization constant.
+    $$ P = \frac{1}{Z} e^{-E/T} $$
+    which is Boltzmann distribution.
+    <!-- <h4>B: proof using Jenssen's inequality</h4>
+    Since \(e^{-x}\) is convex. We have
+    $$ \langle e^{-x}\rangle \ge e^{-\langle x\rangle} $$</p> -->
+    <h2>References</h2>
+    <ol>
+      <li>Opper, Manfred, and David Saad, eds. Advanced mean field methods: Theory and practice.
+        <a href="https://books.google.com/books?hl=en&lr=&id=cuOX8sCDeNAC&oi=fnd&pg=PR7&dq=advanced+mean+field+methods&ots=W0eDE9-mMD&sig=GXdhlSaJzG58te7PjGveD_4oysk#v=onepage&q=advanced%20mean%20field%20methods&f=false">
+          MIT press, 2001 </a></li>
+    </ol>
+    </section>
+
+    <section class="comment">
+      <h2>Comments</h2>
+
+    </section>
+  </main>
+
+  <footer></footer>
+
+  </body>
+
+</html>

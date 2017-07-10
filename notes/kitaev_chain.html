@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Kitaev chain - Clover's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-6 col-m-8 col-mm-12">
+      <strong>Hamiltonians </strong> equivalent under transformations <br/>
+      Complex fermions (1D p-wave superconductor)
+      $$ H = \sum_j \left[ -t ( c^{\dagger}_{j} c_{j+1} - c_{j} c_{j+1}^{\dagger} )
+      + \gamma ( c_{j} c_{j+1} - c_{j}^{\dagger} c_{j+1}^{\dagger} ) + 2h c^{\dagger}_{j} c_{j} \right] $$
+      Majorana fermions
+      $$ H_{\mathrm{M}} = \sum_j \left[ \frac{-t+\gamma}{2}\; ia_j b_{j+1} +
+      \frac{t+\gamma}{2}\; ib_ja_{j+1} + h \;ia_jb_j \right] $$
+      Spin-\(\frac{1}{2}\)
+      $$ H_{\mathrm{XY}} = \sum_{j} \left[ \frac{t+\gamma}{2} \sigma_{j}^x \sigma_{j+1}^x
+      + \frac{t-\gamma}{2} \sigma_{j}^y \sigma_{j+1}^y + h \sigma_{j}^z \right] $$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong> Transformations </strong> <br/>
+      <em> Majorana fermion </em>
+      $$ a_j = c_j + c_j^{\dagger}, \;\; i b_j = c_j - c_j^{\dagger} $$
+      some relations
+      $$ ia_jb_j = 2c_j^{\dagger}c_j-1 $$
+      <em> Jordan-Wigner transformation </em>
+      $$ c_j = \left( \prod_{k=1}^{j-1} \sigma_k^z \right) \frac{\sigma_j^x - i \sigma_j^y}{2} $$
+      some relations
+      $$ c_j^{\dagger} c_j = \frac{1+\sigma_j^z}{2} $$
+      $$ c_j^{\dagger} c_{j+1} + h.c. = -\frac{1}{2} ( \sigma_{j}^x \sigma_{j+1}^x + \sigma_{j}^y \sigma_{j+1}^y ) $$
+      $$ c_j c_{j+1} + h.c. = \frac{1}{2} ( \sigma_{j}^x \sigma_{j+1}^x - \sigma_{j}^y \sigma_{j+1}^y ) $$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong> Bloch structure </strong> <br/>
+      For a chain of length \(L\) with periodic boundary condition
+      $$ c^{\dagger}_j = \sum_k e^{-ikj} c^{\dagger}_k, \;\; k=\frac{2\pi n}{L}$$
+      <em> Bogoliubov-de-Gennes (BdG) formalism </em> <br/>
+      $$ H = \Psi^{\dagger}_k \left(
+      \begin{array}{cc}
+      -t\cos k + h & - i \gamma \sin k \\
+      i \gamma \sin k & t\cos k - h
+      \end{array} \right) \Psi_k $$
+      where \(\Psi^{\dagger}_k=(c^{\dagger}_k,\;c_{-k})\).
+      $$\mathcal{H}(k)=\tau_y \gamma\sin k + \tau_z (h-t\cos k) $$
+      Energy spectrum
+      $$E_{\pm} = \pm \sqrt{(t\cos k - h)^2+(\gamma \sin k)^2} $$
+      Symmetries
+      $$\mathcal{T}=\mathcal{K}, \;\; \mathcal{P}=\tau_x\mathcal{K}$$
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li> Kitaev, A. Yu.
+        <a href="https://arxiv.org/abs/cond-mat/0010440"> Unpaired Majorana fermions in quantum wires. </a>
+        Physics-Uspekhi 44.10S (2001): 131.</li>
+    </ul>
+  </footer>
+  </body>
+
+</html>

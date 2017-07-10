@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Bayesian - Clover's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong> Bayes rule </strong>
+      $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
+      <table>
+        <tr> <td> \( P(\mathbf{X}|\theta)\;\) </td> <td> probability distribution (or likelihood) </td> </tr>
+        <tr> <td> \(\theta\) </td> <td> unobserved query variables </td> </tr>
+        <tr> <td> \(\mathbf{X}\) </td> <td> observed evidence variables </td> </tr>
+        <tr> <td> \(P(\theta)\) </td> <td> <em> prior </em> </td> </tr>
+        <tr> <td> \(P(\mathbf{X})\) </td> <td> <em> posterior </em> </td> </tr>
+      </table>
+      <strong> Bayesian inference: </strong>
+      given \(\mathbf{X}\) find
+      $$ P(\theta|\mathbf{X}) = \frac{P(\mathbf{X}|\theta)P(\theta)}{P(\mathbf{X})}$$
+      <em> Bayesian decision </em> minimizes expected loss
+      $$ \sum_{\theta^*} L(\theta, \theta^*) P(\theta^*|x) $$
+      with \(\theta^*\) as true values. <br/>
+      \(\Rightarrow\) <em> Maximum a Posteriori (MAP) decision </em>
+      $$ \begin{split}
+      \theta^* & =  \arg\max_{\theta}\; P(\theta|x) \\
+               & = \arg\max_{\theta}\; P(x|\theta)P(\theta)
+      \end{split}$$
+      \(\Rightarrow\) <em> Maximum likelihood (ML) decision </em>
+      $$ \theta^* = \arg\max_{\theta}\; P(x|\theta) $$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Naïve Bayes model</strong> assume different features are conditionally independent
+      $$ P(x_1,x_2,\dots,x_n|\theta) = \prod_{i=1}^n P(x_i|\theta) $$
+      Example: <strong> Spam filter </strong> <br/>
+      \(x=\textrm{message words}\) and \(\theta={\textrm{classification}}\) <br/>
+      <em> Bag of words </em> (Naïve Bayes representation) <br/>
+      $$ P(\theta)=\textrm{percentage of different classes} $$
+      $$ P(x_i|\theta)=\frac{\textrm{word } x_i \textrm{ occurrence in class }\theta}
+      {\textrm{total words occurrence in class }\theta} $$
+      <span class="note"> Laplacian smoothing: </span> pretend you have seen every vocabulary word
+      one more time than you actually did.
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <figure><img src="figs/bayes_net.png" alt="Bayes net"  style="max-width:200px;float:right;"></figure>
+      <strong>Bayesian networks</strong> <br/>
+      A directed, acyclic graph with nodes as random variables and arcs as interactions. Encode conditional independence.<br/>
+      <span class="note"> Exponential savings in representing joint distributions. </span> </br>
+      <strong>Bayesian network inference</strong> <br/>
+      * know network structure (but not the parameters), have complete observations <br/>
+      \(\rightarrow\) parameters \(P(X|Y)\) = observed frequencies <br/>
+      * know network structure (but not the parameters), have incomplete observations <br/>
+      \(\rightarrow\) expectation maximization (EM) algorithm <br/>
+      * network structure is unknown, have complete observations <br/>
+      \(\rightarrow\) complicated ... <br/>
+
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li>CS440/ECE448 Artificial Intelligence by <a href="http://slazebni.cs.illinois.edu/"> Svetlana Lazebnik</a>.</li>
+    </ul>
+  </footer>
+  </body>
+
+</html>
