@@ -153,6 +153,30 @@
       <em>8.7.5 Designing Models to Aid Optimization</em></br>
       <em>8.7.6 Continuation Methods and Curriculum Learning</em></br>
     </div>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>9. Convolutional Networks</strong></br>
+      convolution &#8594; detector (reLU) &#8594; pooling </br>
+      <strong>9.1 The Convolution Operation</strong></br>
+      $$\textrm{Feature map}(t) = \int \textrm{Input}(a) * \textrm{Kernel}(t-a) \mathrm{d}a $$
+      Cross correlation </br>
+      $$\textrm{Feature map}(t) = \int \textrm{Input}(t+a) * \textrm{Kernel}(a) \mathrm{d}a $$
+      <strong>9.2 Motivationn</strong></br>
+      sparse interactions: kernel size can be much smaller than input</br>
+      parameter sharing: same kernel at every position of input</br>
+      equivariant representations: transformations of input remains in output</br>
+      <em>5.11.1 The Curse of Dimensionality</em></br>
+      <strong>9.3 Pooling</strong></br>
+      Helps to make the representation become approximately invariant to small translations of the input</br>
+      <strong>9.4 Convolution and Pooling as an Inﬁnitely Strong Prior</strong></br>
+      <strong>9.5 Variants of the Basic Convolution Function</strong></br>
+      <em>zero-padding</em> (add zeros to the margin so that kernel applied to the edge is valid):</br>
+      valid convolution: all kernels are contained within image (smaller output)</br>
+      same convolution: output size is equal to input</br>
+      full convolution: every pixel is visited equal times (larger output)</br>
+      <em>Unshared convolution</em>: discrete convolution with a small kernel
+      without sharing parameters across locations</br>
+      <em>Tiled convolution</em>: 
+    </div>
   </main>
 
   <footer>

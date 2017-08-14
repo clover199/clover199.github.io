@@ -2,11 +2,10 @@
  nav {
   font-family: 'Dancing Script', Georgia, Times, serif;
   width: 100%;
-  height: 50px;
   position: fixed;
   top: 0px;
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   color: white;
   background-color: #333333;
   z-index: 1;
@@ -16,40 +15,30 @@ nav .menue {
   margin: auto;
   padding: 0;
 }
-nav .menue_show {
-  max-width: 800px;
-  margin: auto;
-  padding: 0;
-}
 nav a {
   color: white;
   display: inline-block;
   text-align: center;
-  padding: 12px;
+  padding: 5px 12px 5px 12px;
   text-decoration: none;
-}
-nav a:active {
-  color: white;
-  text-decoration: none;
-  background-color: #111111;
-  height: 50px;
 }
 nav a:hover {
   color: white;
   text-decoration: none;
   background-color: #111111;
-  height: 50px;
 }
 nav .list_button {
   display: none;
 }
 
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 640px) {
+  nav {
+    font-size: 20px;
+  }
   nav .list_button {
     display: inline-block;
-    font-size: 18px;
-    padding: 10px;
-    height: 50px;
+    font-size: 14px;
+    padding: 6px;
     background-color: #333333;
     border: none;
   }
@@ -64,15 +53,12 @@ nav .list_button {
   }
   nav .menue_show a {
     display: block;
-    clear: both;
     text-align: left;
-    width: 100%;
   }
 }
 
 /* Style for main text/article */
 .background1 {
-  height: 100%;
   background: url(../css/flower.jpg) no-repeat center center fixed;
   background-size: cover;
 }
@@ -83,13 +69,20 @@ nav .list_button {
 .transparent {
   background-color: rgba(256,256,256,0.7);
   min-height: 400px;
-  padding: 20px;
+  padding: 40px;
 }
+.morespace h1{
+  margin: 50px 0;
+}
+.morespace h2{
+  margin: 50px 0;
+}
+
 main {
   font-family: "Times New Roman", Times, serif;
   max-width: 800px;
   margin: auto;
-  padding: 60px 15px 10px 15px;
+  padding: 80px 15px 30px 15px;
 }
 main p{
   font-size: 20px;
@@ -113,48 +106,27 @@ main h4{
   font-size: 22px;
 }
 main figure {
-  display: block;
   padding: 5px;
 }
 main figure img{
   max-width: 320px;
 }
-main table {
-  margin: 10px;
-  font-size: 16px;
-}
-main table th {
-  background-color: #DDDDDD;
-  border: solid;
-  padding: 5px;
-}
-main table td {
-  border: solid;
-  padding: 5px;
-}
 main .notebox {
   clear: right;
   background-color: #EEEEEE;
-  margin: 20px;
+  margin: 0 0 0 10px;
   padding: 10px;
   float: right;
-  max-width: 400px;
+  max-width: 380px;
   box-shadow: 5px 5px #999999;
-  font-size: 16px;
-}
-main ol {
-  font-size: 20px;
 }
 main .projects {
   font-family: "Comic Sans MS";
-  /*display: inline-table;*/
-  /*vertical-align: middle;*/
   font-size: 26px;
   width: 100%;
   overflow: hidden;
-  margin: 30px 20px 0 20px;
+  margin: 30px 0px;
   text-align: center;
-  padding-right: 30px;
 }
 main .projectfig {
   float: left;
@@ -164,39 +136,59 @@ main .projectfig {
   border:solid black;
   border-radius:25px;
   background-color: #FFFFFF;
-  margin: 0 30px 0 30px;
+  margin: 0 20px;
 }
 main .projects a{
   color: #000000;
 }
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 640px) {
+  .transparent {
+    min-height: 300px;
+    padding: 10px;
+  }
+  .morespace h1{
+    margin: 20px 0;
+  }
+  .morespace h2{
+    margin: 20px 0;
+  }
+  main {
+    padding: 40px 10px 10px 10px;
+  }
   main p{
     font-size: 14px;
     line-height: 1.5;
   }
   main h1{
-    font-size: 28px;
-    line-height: 1.4;
+    font-size: 24px;
   }
   main h2{
-    font-size: 24px;
-    line-height: 1.4;
+    font-size: 20px;
   }
   main h3{
-    font-size: 20px;
-    line-height: 1.4;
+    font-size: 16px;
   }
   main h4{
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 14px;
+  }
+  main figure img{
+    max-width: 240px;
   }
   main .notebox {
-    background-color: #EEEEEE;
-    margin: 15px 0px;
-    padding: 10px;
+    margin: 10px 0px;
     clear: both;
     width: 100%;
-    box-shadow: 5px 5px #999999;
-    font-size: 14px;
+  }
+  main .projects {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 400px){
+  main .projectfig {
+    float: none;
+    margin: auto;
+  }
+  main .projectname {
+    margin: auto;
   }
 }
