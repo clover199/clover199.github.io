@@ -35,6 +35,8 @@
         <tr> <td> \(P(\theta)\) </td> <td> <em> prior </em> </td> </tr>
         <tr> <td> \(P(\mathbf{X})\) </td> <td> <em> posterior </em> </td> </tr>
       </table>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
       <strong> Bayesian inference: </strong>
       given \(\mathbf{X}\) find
       $$ P(\theta|\mathbf{X}) = \frac{P(\mathbf{X}|\theta)P(\theta)}{P(\mathbf{X})}$$
@@ -46,6 +48,8 @@
       \theta^* & =  \arg\max_{\theta}\; P(\theta|x) \\
                & = \arg\max_{\theta}\; P(x|\theta)P(\theta)
       \end{split}$$
+      <span class="note">many regularization strategies can be interpreted as MAP Bayesian inference.
+        (e.g. \(L_2\) regularization vs. Gaussian prior)</span></br>
       \(\Rightarrow\) <em> Maximum likelihood (ML) decision </em>
       $$ \theta^* = \arg\max_{\theta}\; P(x|\theta) $$
     </div>
@@ -80,6 +84,7 @@
   <footer>
     <ul>
       <li>CS440/ECE448 Artificial Intelligence by <a href="http://slazebni.cs.illinois.edu/"> Svetlana Lazebnik</a>.</li>
+      <li>STAT542 Statistical Learning by <a href="https://publish.illinois.edu/liangf/teaching/stat-542/">Feng Liang</a>.</li>
     </ul>
   </footer>
   </body>

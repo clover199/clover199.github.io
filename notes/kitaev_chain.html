@@ -30,6 +30,10 @@
       Complex fermions (1D p-wave superconductor)
       $$ H = \sum_j \left[ -t ( c^{\dagger}_{j} c_{j+1} - c_{j} c_{j+1}^{\dagger} )
       + \gamma ( c_{j} c_{j+1} - c_{j}^{\dagger} c_{j+1}^{\dagger} ) + 2h c^{\dagger}_{j} c_{j} \right] $$
+      Define \(\Psi^{\dagger}_j=(c^{\dagger}_j, c_j)\), we can rewrite the Hamiltonian as
+      $$ H = \sum_j \left[ \Psi^{\dagger}_{j} \left( - \frac{t}{2} \tau_z
+      - \frac{\gamma}{2} i\tau_y \right) \Psi_{j+1} + h.c. \right]  +
+      h \sum_j \Psi^{\dagger}_{j} \tau_z \Psi_{j}$$
       Majorana fermions
       $$ H_{\mathrm{M}} = \sum_j \left[ \frac{-t+\gamma}{2}\; ia_j b_{j+1} +
       \frac{t+\gamma}{2}\; ib_ja_{j+1} + h \;ia_jb_j \right] $$
@@ -65,7 +69,7 @@
       Energy spectrum
       $$E_{\pm} = \pm \sqrt{(t\cos k - h)^2+(\gamma \sin k)^2} $$
       Symmetries
-      $$\mathcal{T}=\mathcal{K}, \;\; \mathcal{P}=\tau_x\mathcal{K}$$
+      $$\mathcal{T}=\mathcal{K}, \;\; \mathcal{P}=\tau_x\mathcal{K}, \;\; \mathcal{C}=\tau_x$$
     </div>
   </main>
 

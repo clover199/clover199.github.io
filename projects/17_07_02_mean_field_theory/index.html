@@ -10,6 +10,8 @@
     <link rel="stylesheet", href="../../css/index.css"/>
     <!--icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- fonts for navigation bar -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
     <!-- MathJax for math display -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -44,8 +46,8 @@
     <div id="navlist" class="menue">
       <a href="../../index.html">Home</a>
       <a href="../index.html">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="../../about.html">About</a>
+      <a href="../../contact.html">Contact</a>
     </div>
   </nav>
 
@@ -286,22 +288,24 @@
       </p> -->
     <h2> Appendix </h2>
     <h4>A: Boltzmann distribution minimizes Gibbs free energy</h4>
-    Suppose \(P\) is a functional of \(\{x_i\}\). We want to minimize
-    $$G = \sum_{\{x_i\}} P E + T \sum_{\{x_i\}} P \ln P$$
-    under constraint \(h = \sum_{\{x_i\}} P -1\). Using Lagrange multiplier, we minimize
-    \(G+\lambda h\) without constraints.
-    The variant of \(G\) under variant of \(P\) is
-    $$E - T (\ln P +1) + \lambda = 0 $$
-    Take derivative with respect to \(\lambda\) gives the original constraint
-    $$ \sum_{\{x_i\}} P = 1 $$
-    Note that \(\delta G =0 \) should be satisfied for all \(\lambda\), we get the constraint
-    $$ \sum_{\{x_i\}} \delta P = 0 $$
-    At minimum, the variance of \(G\) should be zero for all \(\delta P\). Together with the
-    constraint for \(\delta P\), we get
-    $$ \frac{E}{T} + \ln P + \mathrm{const.} = 0 $$
-    Therefore \(\lambda\) contributes to the overall normalization constant.
-    $$ P = \frac{1}{Z} e^{-E/T} $$
-    which is Boltzmann distribution.
+    <p>
+      Suppose \(P\) is a functional of \(\{x_i\}\). We want to minimize
+      $$G = \sum_{\{x_i\}} P E + T \sum_{\{x_i\}} P \ln P$$
+      under constraint \(h = \sum_{\{x_i\}} P -1\). Using Lagrange multiplier, we minimize
+      \(G+\lambda h\) without constraints.
+      The variant of \(G\) under variant of \(P\) is
+      $$E - T (\ln P +1) + \lambda = 0 $$
+      Take derivative with respect to \(\lambda\) gives the original constraint
+      $$ \sum_{\{x_i\}} P = 1 $$
+      Note that \(\delta G =0 \) should be satisfied for all \(\lambda\), we get the constraint
+      $$ \sum_{\{x_i\}} \delta P = 0 $$
+      At minimum, the variance of \(G\) should be zero for all \(\delta P\). Together with the
+      constraint for \(\delta P\), we get
+      $$ \frac{E}{T} + \ln P + \mathrm{const.} = 0 $$
+      Therefore \(\lambda\) contributes to the overall normalization constant.
+      $$ P = \frac{1}{Z} e^{-E/T} $$
+      which is Boltzmann distribution.
+    </p>
     <!-- <h4>B: proof using Jenssen's inequality</h4>
     Since \(e^{-x}\) is convex. We have
     $$ \langle e^{-x}\rangle \ge e^{-\langle x\rangle} $$</p> -->

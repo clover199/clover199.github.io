@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/index.css">
     <!--icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- fonts for navigation bar -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
     <script src="../script.js"></script>
     <!-- for google analytics -->
     <script>
@@ -31,21 +33,49 @@
     <div id="navlist" class="menue">
       <a href="../index.html">Home</a>
       <a href="index.html">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
     </div>
   </nav>
 
-  <main>
-    <h1>My projects</h1>
-    <ul>
-      <li><a href="17_06_12_machine_learning_physics/index.html">
-        <h3> Machine Learning in Condensed Matter Physics </h3></a></li>
-      <li><a href="17_07_02_mean_field_theory/index.html">
-        <h3> Mean Field Theory and Boltzmann Machine </h3></a></li>
-    </ul>
-  </main>
-
+  <div class="background1">
+    <main class="transparent">
+      <div style="color: #000000">
+        <h1>My projects</h1>
+        </br></br>
+        <div class="projects">
+          <div class="projectfig">
+            <a href="17_06_12_machine_learning_physics/index.html">
+            <img src="17_06_12_machine_learning_physics/figs/Ising_pca.png"
+            style="width:300px;height:280px;margin-top:-25px;margin-left:-58px"></a>
+          </div>
+        </br>
+            <a href="17_06_12_machine_learning_physics/index.html">
+              Machine Learning in Condensed Matter Physics</a>
+        </div>
+        <div class="projects">
+          <div class="projectfig">
+            <a href="17_07_02_mean_field_theory/index.html">
+            <img src="17_07_02_mean_field_theory/figs/network.png"
+            style="width:100%;height:100%;"></a>
+          </div>
+        </br>
+          <a href="17_07_02_mean_field_theory/index.html">
+            Mean Field Theory and Boltzmann Machine</a>
+        </div>
+        <div class="projects" style="visibility: hidden;">
+          <div class="projectfig">
+            <a href="17_06_12_machine_learning_physics/index.html">
+            <img src="17_06_12_machine_learning_physics/figs/Ising_pca.png"
+            style="width:396px;height:350px;margin-top:-20px;margin-left:-82px"></a>
+          </div>
+          <a href="17_06_12_machine_learning_physics/index.html">
+            <h4> Machine Learning in Condensed Matter Physics </h4></a>
+        </div>
+        <!-- <p> More are coming soon</p> -->
+      </div>
+    </main>
+  </div>
   </body>
 
 </html>

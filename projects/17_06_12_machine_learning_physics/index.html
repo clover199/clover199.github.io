@@ -10,6 +10,8 @@
     <link rel="stylesheet", href="../../css/index.css"/>
     <!--icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- fonts for navigation bar -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
     <script src="../../script.js"></script>
     <!-- for google analytics -->
     <script>
@@ -31,8 +33,8 @@
     <div id="navlist" class="menue">
       <a href="../../index.html">Home</a>
       <a href="../index.html">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="../../about.html">About</a>
+      <a href="../../contact.html">Contact</a>
     </div>
   </nav>
 
@@ -43,9 +45,11 @@
       <p>
         Nowadays almost every place is using machine learning (ML). Machine learning
         is a type of artificial intelligence (AI). It gives computers the ability
-        to learn without being explicitly programmed. Specifically, we set up a machine;
-        and teach it by letting it do some tasks. This is called training. After a machine
-        is properly trained, it can be used to do similar tasks.
+        to learn without being explicitly programmed.
+        To make things concrete, we train a machine by making it do similar tasks repeatedly
+        just the same as we teach a baby to speak by saying words again and again.
+        A baby learns a word after it has heard it enough times.
+        A machine learns to do a task after it has practiced enough.
       </p>
       <p>
         For example, we want to know the regular body temperature of a person at
@@ -53,12 +57,19 @@
         but we can record the temperature of that person several times a day.
         We record for a couple of days, and can use all the data to train a machine.
         After training, the machine should be able to give the expected body temperature
-        of that person provided with a time. Sounds like function fitting, right?
-        Indeed, supervised learning is much like fitting functions, except that
-        the functions can be super complicated.
+        of that person provided with a time. Sounds like finding empirical functions, right?
+        Indeed, we can try to get an empirical function when features are not too many and
+        sample size is large enough. This is exactly what some non-parametric methods are doing.
+        However, when there are too many features we won't be able to explore all the points
+        in the feature space (curse of dimensionality). Then we assume we can approximate
+        the underlying true function with specific types of functions.
+        The simplest type is linear function. More complicated functions may give a
+        better approximation, but what type of functions to use completely depends on the problem
+        we want to solve.
       </p>
       <p>
-        On the other hand, unsupervised learning is letting machines explore the data
+        Above we were talking about supervised learning.
+        On the contrary, unsupervised learning is letting machines explore the data
         by itself. Only input data is given to the machine during training. The machine
         needs to discover patterns or structures of the input data.
       </p>
@@ -67,35 +78,25 @@
         problem in condensed matter is to characterize different phases of matter.
         Classical phase transitions associated with symmetry breaking can be
         classified by local order parameters. In numerical studies, it is sometimes
-        not easy to calculate the order parameters directly. In such cases,
-        machine learning may lend us a hand.
-      </p>
-      <p>
-        With supervised learning, we want (1) to train the machine
-        with some easily solvable systems and apply it to systems that are hard
-        to solve; (2) to calculate the phase transition point between two phases;
-        and (3) to be able to extract order parameters from the machine after
-        training. With unsupervised learning, we hope the machine can tell us if two
-        states are in the same phase.
-      </p>
-      <p>
-        Another direction of applying ML in CMP is representing physics state
-        with neural networks. It is hardly using existing ML methods, but developing
-        new algorithms. We will not talk about this direction in this post.
+        not easy to calculate the order parameters directly.
+        On the other hand, new phase transitions beyond the theory of symmetry breaking
+        were discovered recently.
+        In either case, machine learning can be a method from new perspective.
       </p>
       <p>
         We will not talk about the details of machine learning algorithms
-        in this post, but only applications.
-        The python package scikit-learn is used for machine learning.
+        in this post, but only applications in CMP.
+        The python package scikit-learn is used to do the training.
       </p>
 
     <h2>Fitting 1D functions</h2>
       <p>
-        Let's start from the simplest case: fitting functions with only one variable.
-        We want to do this first because we can generate data all by ourselves.
-        Thus, we know the underlying true function and we can know
+        Before working on physics problems, let's try some machine learning methods.
+        Start from the simplest case: fitting functions with only one variable.
+        We want to do this first because we generate data all by ourselves;
+        we know the underlying true function and we can easily compare
         the performance of different models. Second, it is easy to visualize
-        1D functions in a 2D plane. We can get a sense of what these models are doing.
+        1D functions in a 2D plane.
       </p>
       <p>
         There are two purposes to do function fitting. One is interpreting the data
@@ -115,13 +116,13 @@
       <p>
         We test on three functions: a smooth function, a function having discontinuity
         and a function having singularity.
-        500 training data sets and 100 testing data sets are generated with error
+        500 training samples and 100 testing samples are generated with error
         term following standard normal distribution. In the
-        following figures, we plot 20 fitting data sets.
-        The underlying functions that generate the data are plotted in solid
+        following figures, we plot 20 testing samples.
+        The underlying functions that generate the data are shown in solid
         black lines. True values of the data are plotted as black dots. In the
-        legend, we also presents the root mean square (RMS) calculated from the 100 testing
-        data.
+        legend, we also presents the root mean square (RMS) calculated from all
+        the 100 testing data.
       </p>
       <figure>
         <img src="figs/fit_smooth.png" alt="fit smooth function"/>
@@ -130,21 +131,21 @@
       </figure>
       <p>
         Among the four methods, random forest always gives a small RMS error no matter
-        what underlying functions are. It is easy to understand, sing doing random forest
-        is like fitting with piece wise constant functions. As an ensemble method,
-        random forest uses bagging to reduce variances. Although random forest predicts with
-        a relatively small error, it gives no analytic function, thus is not easy to interpret.
+        what underlying functions are. It is easy to understand, since random forest
+        is an ensemble of trees. Each tree is like a piece wise constant function.
+        Although predictions from a single tree have large variance, averaging over
+        uncorrelated trees significantly reduce the variance, making random forest
+        a reliable method.
       </p>
       <p>
         Simple linear regression is the simplest non-trivial model one can think of.
         It gives the overall trend of data.
         From another perspective, simple linear regression can be viewed as a
         feed-forward neural network with no hidden layers. Adding hidden layers
-        in neural network is effectively perturb the linear regression line towards the true
+        in neural network is effectively perturbing the linear regression line towards the true
         curve. As we can see from the figures, NN1 performs a little bit better
-        than SLR while NN2 is better than NN1. Note that with a small
-        number of hidden layers, neural network can only capture the main features
-        of the curve.
+        than SLR while NN2 is better than NN1. Note that a shallow neural network
+        can only capture the main features of the curve.
       </p>
     <h3>1D classification</h3>
       <p>
@@ -171,14 +172,16 @@
         <img src="figs/fit_non_smooth.png" alt="fit non-smooth function"/>
       </figure>
       <p>
-        As can be seen in the figures, neural networks can better fit the underlying
-        probability function <var>f</var>. Linear regression fits well when there is
-        a clear trend in <var>f</var>, while random forest performs worst among the
-        four models.
+        As can be seen in the figures, random forest performs worst among the four.
+        It can hardly follow the trend of the underlying probability.
+        This is due to its high variance compared with other methods.
+        When the underlying probability function is not too complicated,
+        it can be well approximated by neural networks and sometimes even linear functions.
+        In such case, the high variance of random forest makes it less favorable.
       </p>
     <h2>Machine learning phase transitions in classical Ising model</h2>
       <p>
-        After some practice in 1D problems, let's do a real physics problem.
+        After some practice in 1D problems, we can start a real physics problem.
         Classical Ising model can model magnet in a simple and straightforward way.
         The model assumes that every atom in a material has a small magnetization.
         We call them spins <var>&sigma;</var>. To make the problem
@@ -190,21 +193,28 @@
         Assume spins only interact with their nearest neighbors with interacting
         energy  <var>E<sub>ij</sub>=-&sigma;<sub>i</sub> &sigma;<sub>j</sub></var>.
         A system always wants to lower its energy,
-        so such interaction favors a state with all <var>&sigma;</var> having the
+        so such a interaction favors a state with all <var>&sigma;</var> having the
         same value i.e. parallel spin configuration. However, this only happens
         at zero temperature. At finite temperature, thermal flotation will flip
-        spins randomly. As long as the total magnetization is non-zero, the material
+        spins randomly. The higher the temperature, the more accepted flips.
+        As long as the total magnetization is non-zero, the material
         is said to be in a ferromagnetic phase.
         When temperature is high enough, the parallel structure is completely
-        destroyed. The total magnetization becomes zero. Then the material becomes
-        paramagnet.
+        destroyed. The total magnetization becomes zero. Then the material is in
+        paramagnetic phase.
       </p>
       <p>
-        Now the problem is what is the temperature that separate the two phases?
-        We plot the averaged magnetization of a 2D square lattice model in the
-        following figure. The black dash line is the theoretical transition temperature.
+        In physics, the transition between ferromagnetic and paramagnetic phases
+        is known as a second order phase transition. There is a specific temperature
+        that separate the two phases. Now the problem is what is that temperature?
+
+        To get this transition temperature, we study a spin system on a 2D square
+        lattice with periodic boundary conditions using Monte Carlo simulation.
+        We plot the averaged magnetization of this system in the following figure.
+        The vertical black dash line is the theoretical transition temperature.
         As we can see, by calculating the magnetization we can easily separate
-        the two phases.
+        the two phases. The magnetization drops to zero in paramagnetic phase.
+        Actually, magnetization is the physical order parameter of such system.
       </p>
       <figure>
         <img src="figs/Ising_transition.png" alt="Ising transition"/>
@@ -212,13 +222,13 @@
     <h3>Supervised learning</h3>
       <p>
         Suppose we do not know the actual transition point nor how to calculate
-        the total magnetization, can we use machine
-        learning to determine the transition point? We know that when temperature
-        is low the system must be in the ferromagnetic phase (labeled as 1), while at high
-        temperature the system is paramagnetic (labeled as 0). We generate some
-        states at low temperature and label them as 1 and generate states labeled
-        as 0 at high temperature. Using these generated spin configuration to train
-        a neural network with two hidden layers, we get the predicted probability
+        the total magnetization, can we use machine learning to determine the transition point?
+        We know that when temperature is low the system must be in the ferromagnetic
+        phase (labeled as 1), while at high temperature the system is paramagnetic
+        (labeled as 0). We generate some states at low temperature and label them
+        as 1 and generate states labeled as 0 at high temperature.
+        Using these generated spin configuration to train a neural network with
+        only one hidden layer, we get the predicted probability
         of being in ferromagnetic phase as shown below
       </p>
       <figure>
@@ -227,16 +237,23 @@
       <p>
         The blue dots are predicted probability and yellow stars are
         magnetization of corresponding test data. The black dash line is again
-        the theoretical transition point. The training data are generated in the
-        temperature range of the green shade. From the figure, it seems machine
-        learning can indeed predict the transition point accurately. Some test states
-        at low temperature have small magnetization because the Monte Carlo simulation
-        is trapped in a local minimum. In fact, if we look at the spin configuration
-        of this local minimum, we will find out that the spins are parallel block-wise.
-        A properly trained machine should be able to tell such states as ferromagnetic
-        states. As shown in the figure, there is one point in the ferromagnetic
-        phase with low magnetization but the model predicts it correctly.
+        the theoretical transition point. The training data are generated from the
+        temperature of the green shade. From the figure, it seems machine
+        learning can indeed predict the transition point accurately.
       </p>
+      <p>
+        What is this neural network capturing in the hidden layer?
+        We plot the value of neurons in the hidden layer in the following figure.
+        When the configuration is from low temperature, the values of hidden neurons
+        are zeros and values with large absolute value. On the other hand,
+        configurations from high temperature gives small absolute values of
+        hidden neurons.
+      </p>
+        <figure>
+        <img src="figs/Ising_nn_low.png" alt="hidden layer values (low temperature)"/>
+        <img src="figs/Ising_nn_high.png" alt="hidden layer values (high temperature)"/>
+        </figure>
+      <p>
     <h3>Confusion scheme</h3>
       <p>
         Sometimes, we do not even know whether there is a phase transition within
@@ -245,6 +262,7 @@
         we guess a value and do training and testing according to this value.
         If the value we guessed is close to the true transition temperature,
         the testing error will be small and accuracy will be close to one.
+        Otherwise, we will get large error and low accuracy.
         We try several different transition point within a parameter range.
         The error should be a local minimum when the trial point is the
         true transition point.
@@ -263,29 +281,44 @@
       </p>
       <p>
         As we can see in the figures, when the true transition point is among the
-        trial points the testing error has local minimum other than at two edges. when
-        the true transition point is not included, the testing error only has
+        trial points the testing error has local minimum other than at two edges.
+        when the true transition point is not included, the testing error only has
         local minimums at the edges.
       </p>
     <h3>Unsupervised learning</h3>
       <p>
         Using confusion scheme, we still need to have some knowledge of the system.
         Can we separate the phases only from their spin configuration?
-        First we use principal component analysis (PCA) to do dimension reduction
-        and plot the data in 2D plane.
+        First we try to plot the data in a 2D plane. We use principal component
+        analysis (PCA) to find the plane with largest variance and project the data
+        onto that plane.
       </p>
       <figure>
         <img src="figs/Ising_pca.png" alt="pca"/>
         <img src="figs/Ising_pca_predict.png" alt="pca fitting"/>
       </figure>
       <p>
-        As can be seen in the figure, the data are clearly clustered into three groups.
-        We use K-means clustering to classify the states using three groups.
+        As can be seen from the figure, the data are clearly clustered into three groups.
+        We apply K-means clustering method to classify the states using three groups.
         The center of clusters are marked as red stars.
         The plot is consistent with our expectation.
         The middle one is the paramagnetic phase. The left and right groups
         are ferromagnetic phases with positive/negative magnetizations.
-        However, the prediction made by the trained model is random. I am confused here.
+        We plot the predictions made by K-means clusters on the right.
+        We can see that the model is cable to separate the two phases.
+        However, there are some misclassifications near the transition temperature.
+      </p>
+      <figure>
+        <img src="figs/Ising_kpca.png" alt="pca"/>
+        <img src="figs/Ising_kpca_predict.png" alt="pca fitting"/>
+      </figure>
+      <p>
+        We notice that a linear PCA may not be the best way to see the separation,
+        so we apply kernel PCA using radial basis function (RBF).
+        We repeat the same procedure except using the data after kernel PCA transformation
+        for clustering. The results are plotted above. The plotted data indicates a better
+        separation between the phases. It is demonstrated in the prediction,
+        as the misclassified area gets narrowed down.
       </p>
       <p>
         In this post, we applied machine learning to a simple physics problem.
@@ -301,6 +334,9 @@
       <li>van Nieuwenburg, Evert PL, Ye-Hua Liu, and Sebastian D. Huber. "Learning phase transitions by confusion."
         <a href="https://www.nature.com/nphys/journal/v13/n5/abs/nphys4037.html">
           Nature Physics 13.5 (2017): 435-439</a></li>
+      <li>Source code:
+        <a href="https://github.com/clover199/clover199.github.io/blob/master/codes/ML_CMP.ipynb">
+        here</a></li>
     </ol>
     </section>
 
