@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Deep learning book - Clover's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>5.11 Challenges Motivating Deep Learnin</strong></br>
+      <em>5.11.1 The Curse of Dimensionality</em></br>
+      Number of grids can be much larger than number of samples.</br>
+      <em>5.11.2 Local Constancy and Smoothness Regularization</em></br>
+      We are implicitly using smoothness and local constancy as priors in
+      non-parametric models such as k-nearest-neighbors and decision trees.
+      They fail in high dimensions because We can hardly find "nearby" samples.</br>
+      <em>5.11.3 Manifold Learning</em></br>
+      Assumption: most inputs are along manifolds of lower dimensions compared with parameter space.
+      For example, images, texts and sounds inputs. </br>
+    </div>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>6. Deep Feedforward Network</strong></br>
+      <strong>6.1 Example: Learning XOR</strong></br>
+      There are systems cannot be fit by linear models but only nonlinear ones.</br>
+      <strong>6.2 Gradient-Based Learning</strong></br>
+      <em>6.2.1 Cost Functions</em></br>
+      <em>6.2.1.1 Learning Conditional Distributions with Maximum Likelihood</em></br>
+      Using maximum likelihood avoids saturation in activation functions.
+      Saturation in activation functions can lead to problems in gradient based algorithms.</br>
+      <em>6.2.1.2 Learning Conditional Statistics</em></br>
+      <em>6.2.2 Output Units</em></br>
+      <em>6.2.2.1 Linear Units for Gaussian Output Distributions</em></br>
+      <em>6.2.2.2 Sigmoid Units for Bernoulli Output Distributions</em></br>
+      <em>6.2.2.3 Softmax Units for Multinoulli Output Distributions</em></br>
+      <em>6.2.2.4 Other Output Types</em></br>
+      e.g. Gaussian mixtures</br>
+      <strong>6.3 Hidden Units</strong></br>
+      <em>6.3.1 Rectiﬁed Linear Units and Their Generalizations</em></br>
+      <em>6.3.2 Logistic Sigmoid and Hyperbolic Tangent</em></br>
+      <em>6.3.3 Other Hidden Units</em></br>
+      <strong>6.4 Architecture Design</strong></br>
+      <em>6.4.1 Universal Approximation Properties and Depth</em></br>
+      Universal approximation theorem: a feedforward network with a linear output
+      layer and at least one hidden layer with any “squashing” activation function
+      (such as the logistic sigmoid activation function) can approximate any Borel measurable function
+      from one ﬁnite-dimensional space to another with any desired non-zero amount of error,
+      provided that the network is given enough hidden units. </br>
+      <em>6.4.2 Other Architectural Considerations</em></br>
+      <strong>6.5 Back-Propagation and Other Diﬀerentiation Algorithms</strong></br>
+      <em>6.5.1 Computational Graphs</em></br>
+      <em>6.5.2 Chain Rule of Calculus</em></br>
+      <em>6.5.3 Recursively Applying the Chain Rule to Obtain Backprop</em></br>
+      <em>6.5.4 Back-Propagation Computation in Fully-Connected MLP</em></br>
+      <em>6.5.5 Symbol-to-Symbol Derivatives</em></br>
+      <em>6.5.6 General Back-Propagation</em></br>
+      <em>6.5.7 Example: Back-Propagation for MLP Training</em></br>
+      <em>6.5.8 Complications</em></br>
+      <em>6.5.9 Diﬀerentiation outside the Deep Learning Community</em></br>
+      <em>6.5.10 Higher-Order Derivatives</em></br>
+      <strong>6.6 Historical Notes</strong></br>
+    </div>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>7 Regularization for Deep Learning</strong></br>
+      <strong>7.1 Parameter Norm Penalties</strong></br>
+      <em>7.1.1 \(L^2\) Parameter Regularization</em></br>
+      <em>7.1.2 \(L^1\) Regularization</em></br>
+      <strong>7.2 Norm Penalties as Constrained Optimization</strong></br>
+      <strong>7.3 Regularization and Under-Constrained Problemsn</strong></br>
+      <strong>7.4 Dataset Augmentation</strong></br>
+      <strong>7.5 Noise Robustness</strong></br>
+      <em>7.5.1 Injecting Noise at the Output Targets</em></br>
+      <strong>7.6 Semi-Supervised Learning</strong></br>
+      <strong>7.7 Multi-Task Learning</strong></br>
+      <strong>7.8 Early Stopping</strong></br>
+      <strong>7.9 Parameter Tying and Parameter Sharing</strong></br>
+      <strong>7.10 Sparse Representations</strong></br>
+      <strong>7.11 Bagging and Other Ensemble Method</strong></br>
+      <strong>7.12 Dropout</strong></br>
+      <strong>7.13 Adversarial Training</strong></br>
+      <strong>7.14 Tangent Distance, Tangent Prop, and Manifold Tangent Classiﬁer</strong></br>
+    </div>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>8 Optimization for Training Deep Models</strong></br>
+      <strong>8.1 How Learning Diﬀers from Pure Optimization</strong></br>
+      <em>8.1.1 Empirical Risk Minimization</em></br>
+      <em>8.1.2 Surrogate Loss Functions and Early Stopping</em></br>
+      <em>8.1.3 Batch and Minibatch Algorithms</em></br>
+      <strong>8.2 Challenges in Neural Network Optimization</strong></br>
+      <em>8.2.1 Ill-Conditioning</em></br>
+      <em>8.2.2 Local Minima</em></br>
+      <em>8.2.3 Plateaus, Saddle Points and Other Flat Regions</em></br>
+      <em>8.2.4 Cliﬀs and Exploding Gradients</em></br>
+      <em>8.2.5 Long-Term Dependencies</em></br>
+      <em>8.2.6 Inexact Gradients</em></br>
+      <em>8.2.7 Poor Correspondence between Local and Global Structure</em></br>
+      <em>8.2.8 Theoretical Limits of Optimization</em></br>
+      <strong>8.3 Basic Algorithms</strong></br>
+      <em>8.3.1 Stochastic Gradient Descent</em></br>
+      Follow the gradient of randomly selected mini batches downhill with decreasing learning rate.</br>
+      <em>8.3.2 Momentum</em></br>
+      Accumulates an exponentially decaying moving average of past gradients
+      and continues to move in their direction.</br>
+      <em>8.3.3 Nesterov Momentum</em></br>
+      Evaluate the gradient after the current velocity is applied. </br>
+      <strong>8.4 Parameter Initialization Strategie</strong></br>
+      Break symmetry between different unit, i.e. random initialization for weights.</br>
+      <strong>8.5 Algorithms with Adaptive Learning Rates</strong></br>
+      delta-bar-delta algorithm: if changes direction along one axis, then increase learning rate.
+      Other wise, decrease. </br>
+      <em>8.5.1 AdaGrad</em></br>
+      Designed to converge rapidly when applied to a convex function.</br>
+      <em>8.5.2 RMSProp</em></br>
+      Uses an exponentially decaying average to discard history from the extreme past.</br>
+      <em>8.5.3 Adam</em></br>
+      adaptive moments.</br>
+      <em>8.5.4 Choosing the Right Optimization Algorithm</em></br>
+      <strong>8.6 Approximate Second-Order Methods</strong></br>
+      <em>8.6.1 Newton’s Method</em></br>
+      Find zero point of first derivative.
+      $$ \theta^* = \theta_0 - H^{-1}\nabla_{\theta_0} J(\theta_0) $$
+      Levenberg–Marquardt algorithm: regularize Hessian matrix to prevent singularity.</br>
+      <em>8.6.2 Conjugate Gradients</em></br>
+      Improve steepest descent by conjugate current direction with previous direction.
+      $$ d_t^{T} H d_{t-1} = 0 $$
+      <em>8.6.3 Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm</em></br>
+      Approximate \(H^{-1}\) with a matrix that is iteratively reﬁned by low rank updates.</br>
+      Limited Memory BFGS (or L-BFGS)</br>
+      <strong>8.7 Optimization Strategies and Meta-Algorithms</strong></br>
+      <em>8.7.1 Batch Normalization</em></br>
+      Reduces the problem of coordinating updates across many layers.</br>
+      <em>8.7.2 Coordinate Descent</em></br>
+      <em>8.7.3 Polyak Averaging</em></br>
+      <em>8.7.4 Supervised Pretraining</em></br>
+      <em>8.7.5 Designing Models to Aid Optimization</em></br>
+      <em>8.7.6 Continuation Methods and Curriculum Learning</em></br>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="http://www.deeplearningbook.org/">Deep Learning</a> by Ian Goodfellow, Yoshua Bengio and Aaron Courville.</li>
+    </ul>
+  </footer>
+  </body>
+
+</html>

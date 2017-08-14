@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Classification - Clover's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Discriminant Analysis</strong>
+      $$P(\mathbf{Y}=k|\mathbf{X}=x) = \frac{\pi_k f_k(x)}{\sum_l\pi_l f_l(x)}$$
+      \(\pi_k=P(Y=k)\) marginal probability for class \(k\)</br>
+      \(f_k(x)=P(\mathbf{X}=x|\mathbf{Y}=k)\sim N(\mu_k,\Sigma_k)\)</br>
+      <em>Quadratic Discriminant Analysis (QDA)</em></br>
+      quadratic decision boundaries</br>
+      Sample covariance matrix for each class
+      $$\hat{\Sigma}_k = \frac{1}{n_k-1}\sum_{i:y_i=k}(x_i-\hat{\mu}_k)(x_i-\hat{\mu}_k)^t$$
+      <em>Linear Discriminant Analysis (LDA)</em></br>
+      linear decision boundaries</br>
+      Assume \(\Sigma_k=\Sigma\) (the pooled sample covariance matrix)
+      $$\hat{\Sigma} = \frac{1}{n-K}\sum_{k=1}^K\sum_{i:y_i=k}(x_i-\hat{\mu}_k)(x_i-\hat{\mu}_k)^t$$
+      <em>Naive Bayes</em></br>
+      Assume \(\Sigma_k=\Sigma\) is diagonal.</br>
+      <em>Fisher Discriminant Analysis (FDA)</em></br>
+      Minimize \(\frac{\textrm{between group variance}}{\textrm{within group variance}}\).
+      Implicitly assumes \(\Sigma_k=\Sigma\).</br>
+      $$B = \frac{1}{K-1}\sum_{k=1}^K n_k (\bar{x}_k-\bar{x})(\bar{x}_k-\bar{x})^t$$
+      $$W = \frac{1}{n-K}\sum_{k=1}^K\sum_{i:y_i=k}(x_i-\bar{x}_k)(x_i-\bar{x}_k)^t$$
+      Solve
+      $$ \max_a a^t B a \;\textrm{ subject to }\; a^t W a = 1 $$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Principal components analysis (PCA)</strong></br>
+      $$ \mathbf{X} = \mathbf{U} \mathbf{D} \mathbf{V}^{\dagger} $$
+      \(\mathbf{X}_{n\times p}\) each column has zero mean and unit variance.</br>
+      \(\mathbf{U}\) and \(\mathbf{V}\) have orthonormal columns.</br>
+      \(\mathbf{D}\) diagonal matrix with descending diagonals.</br>
+      <em>score vectors</em>: columns of \(\mathbf{X}\mathbf{V}\)</br>
+      <em>loading vectors</em>: columns of \(\mathbf{V}\)</br>
+      <em>biplot</em>: plot of both scores and loadings</br>
+      scree plot: plot of the proportion of variance explained (PVE)</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Logistic regression</strong>
+      $$ \mathbf{Y}|\mathbf{X}=x \sim \mathrm{Bern}\left(\frac{1}{1+e^{ax+b}} \right)$$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Support vector machine (SVM)</strong></br>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li>STAT542 Statistical Learning by <a href="https://publish.illinois.edu/liangf/teaching/stat-542/">Feng Liang</a>.</li>
+    </ul>
+  </footer>
+  </body>
+
+</html>
