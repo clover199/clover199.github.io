@@ -34,11 +34,12 @@ nav .list_button {
 @media only screen and (max-width: 640px) {
   nav {
     font-size: 20px;
+    position: static;
   }
   nav .list_button {
     display: inline-block;
-    font-size: 14px;
-    padding: 6px;
+    font-size: 16px;
+    padding: 8px;
     background-color: #333333;
     border: none;
   }
@@ -153,7 +154,7 @@ main .projects a{
     margin: 20px 0;
   }
   main {
-    padding: 40px 10px 10px 10px;
+    padding: 10px;
   }
   main p{
     font-size: 14px;
