@@ -139,6 +139,10 @@ main .projectfig {
   background-color: #FFFFFF;
   margin: 0 20px;
 }
+main #aboutfig {
+  float: right;
+  max-width: 200px;
+}
 main .projects a{
   color: #000000;
 }
@@ -184,12 +188,16 @@ main .projects a{
     font-size: 20px;
   }
 }
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 500px){
   main .projectfig {
     float: none;
     margin: auto;
   }
-  main .projectname {
+  main #aboutfig {
+    float: none;
     margin: auto;
   }
+  /*main .projectname {
+    margin: auto;
+  }*/
 }

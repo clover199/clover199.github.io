@@ -175,7 +175,29 @@
       full convolution: every pixel is visited equal times (larger output)</br>
       <em>Unshared convolution</em>: discrete convolution with a small kernel
       without sharing parameters across locations</br>
-      <em>Tiled convolution</em>: 
+      <em>Tiled convolution</em>: between a convolutional layer and a locally connected layer.
+      Learn a set of kernels that we rotate through as we move through space.</br>
+      <strong>9.6 Structured Outputs</strong></br>
+      Output structures, i.e. layouts.</br>
+      <strong>9.7 Data Type</strong></br>
+      Same-size input and different-size input.</br>
+      <strong>9.8 Eﬃcient Convolution Algorithms</strong></br>
+      Fourier transformation &#8594; point-wise product &#8594; inverse Fourier transformation.</br>
+      Separable kernel: can be written as outer products. Compose lower-dimensional convolutions.</br>
+      <strong>9.9 Random or Unsupervised Features</strong></br>
+      Random-weight convolution layers followed by pooling are frequently selective and translation invariant.</br>
+      Supervised/Unsupervised greedy layer-wise pretraining</br>
+      <strong>9.10 The Neuroscientiﬁc Basis for Convolutional Net-works</strong></br>
+      <em>Gabor function</em>: describes the weight at a 2-D point in the image.</br>
+      <strong>9.11 Convolutional Networks and the History of DeepLearning</strong></br>
+    </div>
+    <div class="col-4 col-m-6 col-mm-12">
+      <strong>10. Sequence Modeling: Recurrent and Recursive Nets</strong></br>
+      idea: parameter sharing</br>
+      compare: convolution based time-delay neural networks (shallow sharing) VS
+      recurrent networks (deep sharing).</br>
+      <strong>10.1 Unfolding Computational Graphs</strong></br>
+
     </div>
   </main>
 
