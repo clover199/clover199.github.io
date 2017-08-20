@@ -2,7 +2,7 @@
 <html lang="en-US">
 
   <head>
-    <title>Deep learning book - Clover's notes</title>
+    <title>Deep learning book - Emma's notes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- mobile friendly -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -156,9 +156,9 @@
     <div class="col-4 col-m-6 col-mm-12">
       <strong>9. Convolutional Networks</strong></br>
       convolution &#8594; detector (reLU) &#8594; pooling </br>
-      <strong>9.1 The Convolution Operation</strong></br>
+      <strong>9.1 The Convolution Operation</strong>
       $$\textrm{Feature map}(t) = \int \textrm{Input}(a) * \textrm{Kernel}(t-a) \mathrm{d}a $$
-      Cross correlation </br>
+      Cross correlation
       $$\textrm{Feature map}(t) = \int \textrm{Input}(t+a) * \textrm{Kernel}(a) \mathrm{d}a $$
       <strong>9.2 Motivationn</strong></br>
       sparse interactions: kernel size can be much smaller than input</br>
@@ -196,8 +196,15 @@
       idea: parameter sharing</br>
       compare: convolution based time-delay neural networks (shallow sharing) VS
       recurrent networks (deep sharing).</br>
-      <strong>10.1 Unfolding Computational Graphs</strong></br>
-
+      <strong>10.1 Unfolding Computational Graphs</strong>
+      $$h^{(t)} = f(h^{(t-1)}, x^{(t)}; \theta)$$
+      <strong>10.2 Recurrent Neural Networks</strong>
+      Network with hidden-to-hidden recurrence can simulate a universal Turing machine.</br>
+      The straight forward back-propagation through time (BPTT) is expensive to train.</br>
+      <em>10.2.1 Teacher Forcing and Networks with Output Recurrence</em></br>
+      Network with output-to-hidden recurrence can not simulate a universal Turing machine.</br>
+      Trained with teacher forcing: during training the model receives the ground truth output
+      \(y(t)\) as input at time \(t+ 1\).</br>
     </div>
   </main>
 
