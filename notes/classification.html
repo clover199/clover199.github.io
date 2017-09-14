@@ -30,6 +30,10 @@
       $$P(\mathbf{Y}=k|\mathbf{X}=x) = \frac{\pi_k f_k(x)}{\sum_l\pi_l f_l(x)}$$
       \(\pi_k=P(Y=k)\) marginal probability for class \(k\)</br>
       \(f_k(x)=P(\mathbf{X}=x|\mathbf{Y}=k)\sim N(\mu_k,\Sigma_k)\)</br>
+      $$\begin{split}
+      d_k(x) = &(x-\mu_k)^t\Sigma_k^{-1}(x-\mu_k)+\log|\Sigma_k|\\
+      &-2\log\pi_k
+      \end{split}$$
       <em>Quadratic Discriminant Analysis (QDA)</em></br>
       quadratic decision boundaries</br>
       Sample covariance matrix for each class
@@ -50,6 +54,7 @@
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Principal components analysis (PCA)</strong></br>
+      linear decision boundaries</br>
       $$ \mathbf{X} = \mathbf{U} \mathbf{D} \mathbf{V}^{\dagger} $$
       \(\mathbf{X}_{n\times p}\) each column has zero mean and unit variance.</br>
       \(\mathbf{U}\) and \(\mathbf{V}\) have orthonormal columns.</br>
@@ -61,10 +66,42 @@
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Logistic regression</strong>
-      $$ \mathbf{Y}|\mathbf{X}=x \sim \mathrm{Bern}\left(\frac{1}{1+e^{ax+b}} \right)$$
+      $$ \mathbf{Y}|\mathbf{X}=x \sim \mathrm{Bern}\left(\eta(x,\beta) \right)$$
+      where \(\eta(x,\beta)=1/\left(1+e^{-\beta x}\right)\)</br>
+      The MLE can be obtained by <em>Reweighted LS Algorithm</em>:</br>
+      1. With given \(\beta\) calculate weight $$W = \mathrm{diag}\left[\eta(1-\eta)\right]$$
+      2. Calculate target value $$z=x\beta-W^{-1}(y-\eta)$$
+      3. Replace \(\beta\) by estimator from weighted least square
+      $$\beta = \left(x^tWx\right)^{-1}x^tW z $$
+      <span class="note">When data are well separated, add penalty term (Lasso) to get convergence.</span>
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Support vector machine (SVM)</strong></br>
+      <figure><img src="figs/svm.png" alt="SVM"  style="max-width:100%;"></figure>
+      <strong>linear</strong>: maximize margin between two groups.<br>
+      <strong>linear non-separable</strong>
+      $$\mathrm{minimize}\quad \frac{1}{2}||\beta||^2+\gamma\sum\epsilon_i$$
+      $$\textrm{subject to}\quad y_i(\beta\cdot x_i+\beta_0)-1+\epsilon_i\ge 0,\; \epsilon_i\ge0$$
+      If two groups are separable, \(\gamma\to\infty\).</br>
+      Compare with Loss + Penalty form
+      $$\mathrm{minimize}\quad \sum \left[1-y_if(x_i)\right] + \mu ||\beta||^2$$
+      with <em>hinge loss</em> as penalty.</br>
+      It's dual problem:
+      $$\mathrm{maximize}\quad \sum\lambda_i-\frac{1}{2}\lambda_i\lambda_jy_iy_j(x_i\cdot x_j)$$
+      $$\textrm{subject to}\quad \sum \lambda_iy_i=0,\;0\le\lambda_i\le\gamma$$
+      Complementarity condition:
+      $$\lambda_i\left[y_i(\beta\cdot x_i+\beta_0)-1\right]=0$$
+      $$\hat{\beta} = \sum\lambda_iy_ix_i$$
+      Points with non-zero \(\lambda_i\) are <em>support vectors</em>.</br>
+      <strong>non-linear:</strong> <em>kernel trick</em></br>
+      Define inner product \(K(x_i,x_j)\) in feature space.</br>
+      Prediction of new point \(x^*\)
+      $$ \mathrm{sign}\left(\sum\lambda_iy_iK(x_i,x^*)+\hat{\beta}_0\right) $$
+      Popular kernels:</br>
+      \(d\)th degree polynomial
+      $$ K(x,y) = (1+x\cdot y)^d$$
+      Radial basis (the feature space is of infinite-dimension)
+      $$ K(x,y) = e^{-||x-y||^2/c} $$
     </div>
   </main>
 

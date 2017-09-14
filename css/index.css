@@ -89,6 +89,10 @@ main p{
   font-size: 20px;
   line-height: 1.8;
 }
+main li{
+  font-size: 20px;
+  line-height: 1.8;
+}
 main h1{
   font-family: "Comic Sans MS";
   font-size: 34px;
@@ -161,6 +165,10 @@ main .projects a{
     padding: 10px;
   }
   main p{
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  main li{
     font-size: 14px;
     line-height: 1.5;
   }

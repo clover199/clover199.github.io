@@ -84,7 +84,7 @@
       <em>7.1.1 \(L^2\) Parameter Regularization</em></br>
       <em>7.1.2 \(L^1\) Regularization</em></br>
       <strong>7.2 Norm Penalties as Constrained Optimization</strong></br>
-      <strong>7.3 Regularization and Under-Constrained Problemsn</strong></br>
+      <strong>7.3 Regularization and Under-Constrained Problems</strong></br>
       <strong>7.4 Dataset Augmentation</strong></br>
       <strong>7.5 Noise Robustness</strong></br>
       <em>7.5.1 Injecting Noise at the Output Targets</em></br>
@@ -121,17 +121,20 @@
       and continues to move in their direction.</br>
       <em>8.3.3 Nesterov Momentum</em></br>
       Evaluate the gradient after the current velocity is applied. </br>
-      <strong>8.4 Parameter Initialization Strategie</strong></br>
+      <strong>8.4 Parameter Initialization Strategies</strong></br>
       Break symmetry between different unit, i.e. random initialization for weights.</br>
       <strong>8.5 Algorithms with Adaptive Learning Rates</strong></br>
       delta-bar-delta algorithm: if changes direction along one axis, then increase learning rate.
       Other wise, decrease. </br>
       <em>8.5.1 AdaGrad</em></br>
+      Rescale gradient by accumulated square gradient.
       Designed to converge rapidly when applied to a convex function.</br>
       <em>8.5.2 RMSProp</em></br>
-      Uses an exponentially decaying average to discard history from the extreme past.</br>
+      Similar with Adagrad, but
+      uses an exponentially decaying average to discard history from the extreme past.
+      Good for non-convex functions. </br>
       <em>8.5.3 Adam</em></br>
-      adaptive moments.</br>
+      Use adaptive moments and gradient square with correction of bias.</br>
       <em>8.5.4 Choosing the Right Optimization Algorithm</em></br>
       <strong>8.6 Approximate Second-Order Methods</strong></br>
       <em>8.6.1 Newton’s Method</em></br>
@@ -164,7 +167,6 @@
       sparse interactions: kernel size can be much smaller than input</br>
       parameter sharing: same kernel at every position of input</br>
       equivariant representations: transformations of input remains in output</br>
-      <em>5.11.1 The Curse of Dimensionality</em></br>
       <strong>9.3 Pooling</strong></br>
       Helps to make the representation become approximately invariant to small translations of the input</br>
       <strong>9.4 Convolution and Pooling as an Inﬁnitely Strong Prior</strong></br>
@@ -196,15 +198,20 @@
       idea: parameter sharing</br>
       compare: convolution based time-delay neural networks (shallow sharing) VS
       recurrent networks (deep sharing).</br>
-      <strong>10.1 Unfolding Computational Graphs</strong>
+      <strong>10.1 Unfolding Computational Graphs</strong></br>
       $$h^{(t)} = f(h^{(t-1)}, x^{(t)}; \theta)$$
-      <strong>10.2 Recurrent Neural Networks</strong>
+      <strong>10.2 Recurrent Neural Networks</strong></br>
       Network with hidden-to-hidden recurrence can simulate a universal Turing machine.</br>
       The straight forward back-propagation through time (BPTT) is expensive to train.</br>
       <em>10.2.1 Teacher Forcing and Networks with Output Recurrence</em></br>
       Network with output-to-hidden recurrence can not simulate a universal Turing machine.</br>
       Trained with teacher forcing: during training the model receives the ground truth output
       \(y(t)\) as input at time \(t+ 1\).</br>
+      <em>10.2.2 Computing the Gradient in a Recurrent Neural Network</em></br>
+      <em>10.2.3 Recurrent Networks as Directed Graphical Models</em></br>
+      <em>10.2.4 Modeling Sequences Conditioned on Context with RNN</em></br>
+      <strong>10.3 Bidirectional RNNs</strong></br>
+      <strong>10.4 Encoder-Decoder Sequence-to-Sequence Architec-tures</strong></br>
     </div>
   </main>
 
