@@ -11,6 +11,13 @@
     <!--icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- MathJax for math display -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 90
+        }
+      });
+    </script>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
@@ -56,7 +63,7 @@
       <strong>Principal components analysis (PCA)</strong></br>
       linear decision boundaries</br>
       $$ \mathbf{X} = \mathbf{U} \mathbf{D} \mathbf{V}^{\dagger} $$
-      \(\mathbf{X}_{n\times p}\) each column has zero mean and unit variance.</br>
+      \(\mathbf{X}_{n\times p}\) each column has zero mean.</br>
       \(\mathbf{U}\) and \(\mathbf{V}\) have orthonormal columns.</br>
       \(\mathbf{D}\) diagonal matrix with descending diagonals.</br>
       <em>score vectors</em>: columns of \(\mathbf{X}\mathbf{V}\)</br>

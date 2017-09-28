@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Time series - Emma's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 90
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Definitions</strong></br>
+      <em>white noise</em> \(w_t\)</br>
+      $$\mathrm{E}(w_t)=0,\quad \mathrm{cov}(w_t,w_s)=\delta_{t,s}\sigma_w^2$$
+      <em>auto-covariance function</em>
+      $$\gamma(s,t) = \mathrm{cov}(x_s,x_t)$$
+      <em>cross-covariance function</em> between two series
+      $$\gamma_{xy}(s,t) = \mathrm{cov}(x_s,y_t)$$
+      <em>strictly stationary</em> time series is one for which the probabilistic
+      behavior of every collection of values is identical to that of the time shifted set
+      $$P(x_{t_1}\le c_1,\dots,x_{t_k}\le c_k)=P(x_{t_1+h}\le c_1,\dots,x_{t_k+h}\le c_k)$$
+      <em>weakly stationary</em> time series is a finite variance process with
+      constant mean and the auto-covariance function depending on time difference.
+      $$\gamma(h)=\mathrm{cov}(x_{t+h},x_t)$$
+      for a stationary time series.</br>
+      Two time series are said to be <em>jointly stationary</em> if they are each stationary,
+      and the cross-covariance function is a function only of lag.
+      $$\gamma_{xy}(h)=\mathrm{cov}(x_{t+h},y_t)$$
+      <em>partial autocorrelation function</em> of a stationary process</br>
+      $$\phi_{11} = \mathrm{cor}(x_{t+1},x_t) = \rho(1)$$
+      $$\phi_{hh} = \mathrm{cor}(x_{t+1}-\hat{x}_{t-1},x_t-\hat{x}_{t}),\quad h\ge2$$
+      <strong>Estimations</strong></br>
+      <em>sample auto-covariance function</em>
+      $$\hat{\gamma}(h) = \frac{1}{n}\sum_{t=1}^{n-h}(x_{t+h}-\bar{x})(x_t-\bar{x})$$
+      <em>sample cross-covariance function</em>
+      $$\hat{\gamma}_{xy}(h) = \frac{1}{n}\sum_{t=1}^{n-h}(x_{t+h}-\bar{x})(y_t-\bar{y})$$
+      where \(\hat{\gamma}_{xy}(-h) = \hat{\gamma}_{yx}(h)\)</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Linear process</strong>
+      $$x_t = \mu + \sum_{j=-\infty}^{\infty}\psi_j w_{t-j},\quad\sum_{j=-\infty}^{\infty}|\psi_j|<\infty$$
+      It has auto-covariance function
+      $$ \gamma(h) = \sigma_w^2 \sum_{j=-\infty}^{\infty} \psi_{j+h} \phi_{j}$$
+      <em>auto-regression model</em> of order \(p\), AR(\(p\))
+      $$x_t = \phi_1x_{t-1}+\phi_2x_{t-2}+\cdots+\phi_px_{t-p}+w_t$$
+      AR(1): \(\gamma(h)=\frac{\sigma_w^2\phi^h}{1-\phi^2}\)</br>
+      <em>moving average model</em> of order \(q\), MA(q)
+      $$x_t = w_t + \theta_1w_{t-1}+\theta_2w_{t-2}+\cdots+\theta_qw_{t-q}$$
+      MA(1): \(\gamma(0)=(1+\theta^2)\sigma_w^2\), \(\gamma(\pm1)=\theta\sigma_w^2\)</br>
+      <em>autoregressive moving average</em> or ARMA(\(p,q\))
+      $$x_t = \phi_1x_{t-1}+\cdots+\phi_px_{t-p}+w_t+ \theta_1w_{t-1}+\cdots+\theta_1w_{t-q}$$
+      or</br>
+      $$\phi(B)x_t = \theta(B)w_t$$
+      where AR and MA polynomials are defined as
+      $$\phi(z) = 1 - \phi_1 z - \cdots - \phi_p z^p$$
+      $$\theta(z) = 1 + \theta_1 z + \cdots + \theta_p z^p$$
+      and the backshift operator is defined by
+      $$Bx_t=x_{t-1}$$
+      A unique stationary solution exists iff \(\phi(z)\ne0\) for \(|z|=1\).</br>
+      Causal (MA) iff \(\phi(z)\ne0\) for \(|z|\le1\).</br>
+      Invertible (AR) iff \(\theta(z)\ne0\) for \(|z|\le1\).</br>
+      <strong>Gaussian process</strong> the \(n\)-dimensional vectors for every collection
+      of distinct time points and every positive integer \(n\), have a multivariate normal distribution.</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>The integrated ARMA</strong> or ARIMA(\(p, d, q\)) if</br>
+      \((1-B)^dx_i\) is ARMA(\(p, q\)). i.e.
+      $$\phi(B)(1-B)^dx_t = \theta(B)w_t$$
+      <em>trend stationary model</em>
+      $$x_t = \mu_t + y_t$$
+      where \(\mu_t\) is the trend and \(y_t\) is a stationary process.
+      <em>random walk with drift</em> MRIMA(0,1,0)
+      $$x_t = x_{t-1}+w_{t}+\delta$$
+      Use differencing over detrending. \(x_t-x_{t-1}\) is stationary.</br>
+      <em>Behavior of the ACF and PACF for ARMA models</em></br>
+      <table>
+        <tr><th></th><th>AR(p)</th><th>MA(q)</th><th>ARMA(p, q)</th></tr>
+        <tr><td>ACF</td><td>Tails off</td><td>Cuts off after lag q</td><td>Tails off</td></tr>
+        <tr><td>PACF</td><td>Cuts off after lag p</td><td>Tails off</td><td>Tails off</td></tr>
+      </table>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Forecasting</strong></br>
+      Predict \(x_{n+h}\) given \(x_{1:n}=\{x_1,x_2,\cdots,x_n\}\).
+      $$x_{n+h} = \mathrm{E}(x_{n+h}|x_{1:n})$$
+      minimizes the mean square error.</br>
+      <em>Best Linear Prediction for Stationary Processes</em>
+      $$x_{n+h}=a_0+\sum_{j=1}^n a_j x_j$$
+      <!-- where \(x_t\) are shifted so that \(\mathrm{E}(x_t)=0\)</br> -->
+      Solve for \(a_k\) from the prediction equations
+      $$\mathrm{E}(x_{n+h})=a_0+\sum_{j=1}^n a_j \mathrm{E}(x_j)$$
+      $$\mathrm{cov}(x_k,x_{n+h}) = \sum_{j=1}^n \mathrm{cov}(x_k,x_j)a_j$$
+      <span class="note">For Gaussian process, the best linear prediction is also the best prediction.</span></br>
+      <strong>The Durbin–Levinson Algorithm</strong></br>
+      Solve linear equation \(y=Ax\) iteratively in \(\Theta(n^2)\) time with matrix \(A_{ij}=f(i-j)\) as Toeplitz matrix.
+      $$\phi_{00}=0,\quad P_1^0 = \gamma(0)$$
+      $$\phi_{nn} = \frac{\rho(n)-\sum_{k=1}^{n-1}\phi_{n-1,k}\rho(n-k)}{1-\sum_{k=1}^{n-1}\phi_{n-1,k}\rho(k)}$$
+      $$\phi_{nk}=\phi_{n-1,k}-\phi_{nn}\phi_{n-1,n-k},\quad k=1,2,\cdots,n-1$$
+      $$P_{n+1}^n = P_{n}^{n-1}(1-\phi_{nn}^2)$$
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li>STAT429 Time Series Analysis by Xiaofeng Shao.</li>
+      <li><a href="http://www.stat.pitt.edu/stoffer/tsa4/">
+        Time Series Analysis and Its Applications - With R Examples</a>
+         by David S. Stoffer, Robert H. Shumway.
+    </ul>
+  </footer>
+  </body>
+
+</html>
