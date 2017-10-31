@@ -33,10 +33,38 @@
 
   <main>
     <div class="col-3 col-m-4 col-mm-6">
-      <em> Hammersley–Clifford theorem </em></br>
-      When the joint probability density of the random variables is strictly positive,
-      it can be represented as a Markov network
-      (or <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random field</a>).
+      <strong>Steps for fitting a model</strong></br>
+      (1) Propose a model in terms of response variable, explanatory variables and residual variables.</br>
+      (2) Specify/define a criterion for judging different estimators.</br>
+      (3) Characterize the best estimator and apply it to the given data.</br>
+      (4) Check the assumptions in (1).</br>
+      (5) If necessary modify model and/or assumptions and go to (1).</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Least Squares</strong></br>
+      minimizes residual sum of square (RSS)</br>
+      $$ \mathbf{Y} = \mathbf{X} \beta + \epsilon$$
+      \(\mathbf{X}\): \(n\times p\)data matrix with \(n\) samples and \(p\) features.</br>
+      If intercept is included, the first column is all ones.</br>
+      \(\mathbf{Y}\): \(n\times1\) response variable.</br>
+      \(\epsilon\): residual (error) variable with covariance matrix \(\Sigma\).</br>
+      <em>Ordinary Least Squares (OLS)</em>: \(\Sigma=\sigma^2\mathbf{I}\)
+      $$ \hat{\beta} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}$$
+      <em>Generalized Least Squares (GLS)</em>:
+      $$ \hat{\beta} = (\mathbf{X}^T\Sigma^{-1}\mathbf{X})^{-1}\mathbf{X}^T\Sigma^{-1}\mathbf{Y}$$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Gauss-Markov Theorem</strong></br>
+      <em>assumptions</em>:</br>
+      linear relationship</br>
+      zero mean, constant variance, uncorrelated residuals</br>
+      <em>theorem</em>:</br>
+      Under the Gauss-Markov assumptions, the OLS estimator has the smallest (Best) variance among all Linear Unbiased
+      Estimators (BLUE).</br>
+      <em>Generalization</em>:</br>
+      GLS is still BLUE.</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
     </div>
   </main>
 

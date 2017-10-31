@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Condensed matter basics - Emma's notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet" href="../css/notes.css">
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- MathJax for math display -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 90
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+
+  <main>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Drude model</strong> <a href="https://en.wikipedia.org/wiki/Drude_model">wiki</a></br>
+      <em>Goal</em>: get finite conductivity by impurity scattering</br>
+      \(q\): electron charge</br>
+      \(n\): charge density</br>
+      \(\tau\): average time between subsequent collisions</br>
+      \(\mathbf{E}\): uniform and constant electric field</br>
+      \(\mathbf{J}\): current density</br>
+      <em>Static</em></br>
+      $$\mathbf{J} = \left( \frac{nq^2\tau}{m} \right) \mathbf{E} \equiv \sigma_0 \mathbf{E}$$
+      derived from
+      $$\langle\mathbf{p}\rangle = q\mathbf{E}\tau = m\langle \mathbf{v}\rangle,\quad
+      \mathbf{J} = nq\langle \mathbf{v}\rangle$$
+      <em>Dynamic</em></br>
+      $$\frac{\mathrm{d}}{\mathrm{d}t}\langle\mathbf{p}(t)\rangle =
+      q\left(\mathbf{E}+\frac{\langle\mathbf{p}(t)\rangle\times\mathbf{B}}{m}\right)-
+      \frac{\langle\mathbf{p}(t)\rangle}{\tau}$$
+      First terms is external force. Second term is from effects of collisions.</br>
+      When \(\mathbf{E}=\mathrm{Re}()\mathbf{E_0e^{iwt}})\)
+      $$\sigma(w) = \frac{\sigma_0}{1+iw\tau}$$
+      <em>Accuracy of model</em></br>
+      Accurate when \(\tau\) is large. Otherwise band structure plays a more important role.</br>
+      Replace electron mass \(m\) by effect mass from band theory \(m^*\)</br>.
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li>Wikipedia</li>
+    </ul>
+  </footer>
+
+  </body>
+
+</html>

@@ -43,8 +43,8 @@
       <em>strictly stationary</em> time series is one for which the probabilistic
       behavior of every collection of values is identical to that of the time shifted set
       $$P(x_{t_1}\le c_1,\dots,x_{t_k}\le c_k)=P(x_{t_1+h}\le c_1,\dots,x_{t_k+h}\le c_k)$$
-      <em>weakly stationary</em> time series is a finite variance process with
-      constant mean and the auto-covariance function depending on time difference.
+      <em>weakly stationary (covariance stationary)</em> time series is a finite variance process with
+      constant mean and the auto-covariance function depending only on time difference.
       $$\gamma(h)=\mathrm{cov}(x_{t+h},x_t)$$
       for a stationary time series.</br>
       Two time series are said to be <em>jointly stationary</em> if they are each stationary,
@@ -81,8 +81,8 @@
       and the backshift operator is defined by
       $$Bx_t=x_{t-1}$$
       A unique stationary solution exists iff \(\phi(z)\ne0\) for \(|z|=1\).</br>
-      Causal (MA) iff \(\phi(z)\ne0\) for \(|z|\le1\).</br>
-      Invertible (AR) iff \(\theta(z)\ne0\) for \(|z|\le1\).</br>
+      <em>Causal</em> (can be written as MA) iff \(\phi(z)\ne0\) for \(|z|\le1\).</br>
+      <em>Invertible</em> (can be written as AR) iff \(\theta(z)\ne0\) for \(|z|\le1\).</br>
       <strong>Gaussian process</strong> the \(n\)-dimensional vectors for every collection
       of distinct time points and every positive integer \(n\), have a multivariate normal distribution.</br>
     </div>
@@ -104,16 +104,22 @@
       </table>
     </div>
     <div class="col-3 col-m-4 col-mm-6">
+      <strong>Wold's Representation Theorem</strong></br>
+      Every covariance-stationary time series can be written as the sum of two time series, one deterministic and one stochastic.
+      $$x_t = \mu_t + y_t$$
+      \(\mu_t\) is a linearly deterministic process, i.e., a linear
+      combination of past values of \(\mu_t\) with constant coefficients.</br>
+      \(y_t\) is an infinite moving average process of error terms or white noises (uncorrelated with \(x_t\)).</br>
       <strong>Forecasting</strong></br>
       Predict \(x_{n+h}\) given \(x_{1:n}=\{x_1,x_2,\cdots,x_n\}\).
       $$x_{n+h} = \mathrm{E}(x_{n+h}|x_{1:n})$$
       minimizes the mean square error.</br>
-      <em>Best Linear Prediction for Stationary Processes</em>
-      $$x_{n+h}=a_0+\sum_{j=1}^n a_j x_j$$
-      <!-- where \(x_t\) are shifted so that \(\mathrm{E}(x_t)=0\)</br> -->
-      Solve for \(a_k\) from the prediction equations
-      $$\mathrm{E}(x_{n+h})=a_0+\sum_{j=1}^n a_j \mathrm{E}(x_j)$$
-      $$\mathrm{cov}(x_k,x_{n+h}) = \sum_{j=1}^n \mathrm{cov}(x_k,x_j)a_j$$
+      <em>Yule Walker Equations</em> for AR(\(p\)) Processes</br>
+      Best linear prediction for stationary processes
+      $$x_{t}=\mu+\sum_{j=1}^n \phi_j (x_{t-j}-\mu)$$
+      Solve for \(\phi_k\) from the prediction equations
+      $$\mathrm{cov}(x_k,x_t) = \sum_{j=1}^n \mathrm{cov}(x_k,x_{t-j})\phi_{j}$$
+      where \(k=t-1,\dots,t-n\).</br>
       <span class="note">For Gaussian process, the best linear prediction is also the best prediction.</span></br>
       <strong>The Durbin–Levinson Algorithm</strong></br>
       Solve linear equation \(y=Ax\) iteratively in \(\Theta(n^2)\) time with matrix \(A_{ij}=f(i-j)\) as Toeplitz matrix.
@@ -130,6 +136,8 @@
       <li><a href="http://www.stat.pitt.edu/stoffer/tsa4/">
         Time Series Analysis and Its Applications - With R Examples</a>
          by David S. Stoffer, Robert H. Shumway.
+      <li><a href="https://ocw.mit.edu/courses/mathematics/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/index.htm">
+      Topics in Mathematics with Applications in Finance</a> - by MIT Open Course Ware</li>
     </ul>
   </footer>
   </body>
