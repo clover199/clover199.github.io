@@ -22,6 +22,15 @@
       ga('create', 'UA-102337520-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <!-- for comments -->
+    <script src="https://apis.google.com/js/plusone.js"></script>
+    <script>
+    gapi.comments.render('comments', {
+        href: window.location,
+        first_party_property: 'BLOGGER',
+        view_type: 'FILTERED_POSTMOD'
+    });
+    </script>
   </head>
 
   <body>
@@ -344,6 +353,20 @@
 
     <section class="comment">
       <h2>Comments</h2>
+      <div class="g-comments"
+          data-href="http://clover199.github.io/projects/"
+          data-first_party_property="BLOGGER"
+          data-view_type="FILTERED_POSTMOD">
+          ???
+      </div>
+      <div id="comments"></div>
+      <!-- <script>
+      gapi.comments.render('comments', {
+          href: window.location,
+          first_party_property: 'BLOGGER',
+          view_type: 'FILTERED_POSTMOD'
+      });
+      </script> -->
     </section>
   </main>
 
