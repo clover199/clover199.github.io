@@ -22,15 +22,6 @@
       ga('create', 'UA-102337520-1', 'auto');
       ga('send', 'pageview');
     </script>
-    <!-- for comments -->
-    <script src="https://apis.google.com/js/plusone.js"></script>
-    <script>
-    gapi.comments.render('comments', {
-        href: window.location,
-        first_party_property: 'BLOGGER',
-        view_type: 'FILTERED_POSTMOD'
-    });
-    </script>
   </head>
 
   <body>
@@ -353,20 +344,21 @@
 
     <section class="comment">
       <h2>Comments</h2>
-      <div class="g-comments"
-          data-href="http://clover199.github.io/projects/"
-          data-first_party_property="BLOGGER"
-          data-view_type="FILTERED_POSTMOD">
-          ???
-      </div>
-      <div id="comments"></div>
-      <!-- <script>
-      gapi.comments.render('comments', {
-          href: window.location,
-          first_party_property: 'BLOGGER',
-          view_type: 'FILTERED_POSTMOD'
-      });
-      </script> -->
+
+      <!-- for comments  -->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <div class="fb-comments"
+        data-href="https://clover199.github.io/projects/17_06_12_machine_learning_physics"
+        data-numposts="5"></div>
+
     </section>
   </main>
 
