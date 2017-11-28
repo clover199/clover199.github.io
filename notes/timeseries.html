@@ -51,8 +51,8 @@
       and the cross-covariance function is a function only of lag.
       $$\gamma_{xy}(h)=\mathrm{cov}(x_{t+h},y_t)$$
       <em>partial autocorrelation function</em> of a stationary process</br>
-      $$\phi_{11} = \mathrm{cor}(x_{t+1},x_t) = \rho(1)$$
-      $$\phi_{hh} = \mathrm{cor}(x_{t+1}-\hat{x}_{t-1},x_t-\hat{x}_{t}),\quad h\ge2$$
+      $$\phi_{1} = \mathrm{cor}(x_{t+1},x_t) = \rho(1)$$
+      $$\phi_{h} = \mathrm{cor}(x_{t+h}-\hat{x}_{t+h},x_t-\hat{x}_{t}),\quad h\ge2$$
       <strong>Estimations</strong></br>
       <em>sample auto-covariance function</em>
       $$\hat{\gamma}(h) = \frac{1}{n}\sum_{t=1}^{n-h}(x_{t+h}-\bar{x})(x_t-\bar{x})$$
@@ -90,6 +90,7 @@
       <strong>The integrated ARMA</strong> or ARIMA(\(p, d, q\)) if</br>
       \((1-B)^dx_i\) is ARMA(\(p, q\)). i.e.
       $$\phi(B)(1-B)^dx_t = \theta(B)w_t$$
+      <span class='note'>A “filter” that separate the signal (for forecasting) from the noise.</span></br>
       <em>trend stationary model</em>
       $$x_t = \mu_t + y_t$$
       where \(\mu_t\) is the trend and \(y_t\) is a stationary process.
@@ -107,13 +108,11 @@
       <strong>Wold's Representation Theorem</strong></br>
       Every covariance-stationary time series can be written as the sum of two time series, one deterministic and one stochastic.
       $$x_t = \mu_t + y_t$$
-      \(\mu_t\) is a linearly deterministic process, i.e., a linear
+      \(\mu_t\) (AR) is a linearly deterministic process, i.e. a linear
       combination of past values of \(\mu_t\) with constant coefficients.</br>
-      \(y_t\) is an infinite moving average process of error terms or white noises (uncorrelated with \(x_t\)).</br>
+      \(y_t\) (MA) is a stochastic process. i.e.an infinite moving average process of error terms or white noises (uncorrelated with \(x_t\)).</br>
       <strong>Forecasting</strong></br>
-      Predict \(x_{n+h}\) given \(x_{1:n}=\{x_1,x_2,\cdots,x_n\}\).
-      $$x_{n+h} = \mathrm{E}(x_{n+h}|x_{1:n})$$
-      minimizes the mean square error.</br>
+      Predict \(x_{n+h}\) given \(x_{1:n}=\{x_1,x_2,\cdots,x_n\}\).</br>
       <em>Yule Walker Equations</em> for AR(\(p\)) Processes</br>
       Best linear prediction for stationary processes
       $$x_{t}=\mu+\sum_{j=1}^n \phi_j (x_{t-j}-\mu)$$
@@ -121,6 +120,8 @@
       $$\mathrm{cov}(x_k,x_t) = \sum_{j=1}^n \mathrm{cov}(x_k,x_{t-j})\phi_{j}$$
       where \(k=t-1,\dots,t-n\).</br>
       <span class="note">For Gaussian process, the best linear prediction is also the best prediction.</span></br>
+      $$x_{n+h} = \mathrm{E}(x_{n+h}|x_{1:n})$$
+      minimizes the mean square error.</br>
       <strong>The Durbin–Levinson Algorithm</strong></br>
       Solve linear equation \(y=Ax\) iteratively in \(\Theta(n^2)\) time with matrix \(A_{ij}=f(i-j)\) as Toeplitz matrix.
       $$\phi_{00}=0,\quad P_1^0 = \gamma(0)$$
@@ -128,6 +129,9 @@
       $$\phi_{nk}=\phi_{n-1,k}-\phi_{nn}\phi_{n-1,n-k},\quad k=1,2,\cdots,n-1$$
       $$P_{n+1}^n = P_{n}^{n-1}(1-\phi_{nn}^2)$$
     </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Tests on stationarity</strong></br>
+      <em>Dickey-Fuller (DF) Test</em>: null hypothesis \(\phi=1\) in AR(1) model.
   </main>
 
   <footer>
@@ -138,6 +142,9 @@
          by David S. Stoffer, Robert H. Shumway.
       <li><a href="https://ocw.mit.edu/courses/mathematics/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/index.htm">
       Topics in Mathematics with Applications in Finance</a> - by MIT Open Course Ware</li>
+      <li>Statistical forecasting: notes on regression and time series analysis
+        <a href="https://people.duke.edu/~rnau/411arim.htm">5. ARIMA models for time series forecasting</a>
+        - by Robert Nau (Fuqua School of Business, Duke University) </li>
     </ul>
   </footer>
   </body>
