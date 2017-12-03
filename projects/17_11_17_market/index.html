@@ -72,16 +72,22 @@
       </figure>
       <p>
         Proposed by Irving Fisher in 1891 in his Ph.D. thesis, a Fisher market
-        has \(m\) agents and \(n\) of divisible goods. As shown in the above cartoon,
-        each agent comes with a budget of \(M_i\) dollars and wants to buy some goods
-        (preferences over different goods are indicated by the width of the line).
-        Of course, no agent will be satisfied if we give them goods randomly.
-        Suppose agent \(i\) is given a bundle of goods \(x_i=\{x_{i1},\dots,x_{in}\}\).
-        He uses a number \(U_i(x_i)\) to indicate his satisfactory over this bundle.
-        This number is called the utility of this agent. We assume we know the utility
-        of all agents.
+        describes a simplified real market which is solvable.
+        Suppose there are \(m\) agents and \(n\) of divisible goods.
+        As shown in the above cartoon, each agent wants to buy some goods
+        (preferences over different goods are indicated by the width of the lines).
+        However, agents have limited budgets \(M_i\) and goods are of limited supply \(S_j\).
+        All agents want to maximize their total satisfactory within their budgets.
+        Suppose agent \(i\) bought a boundle \(x_i=\{x_{i1},\dots,x_{in}\}\).
+        His satisfactory over this boundle is indicated by utility function \(U_i(x_i)\).
+        To make life easier, linear utility functions are used, i.e.
+        \(U_i(x_i) = \sum_{j=1}^n U_{ij}x_j\).
+        Now we have a full description of Fisher market:
+        $$\textrm{Fisher}\{M_i, U_{ij}, S_j\}$$
+        The problem 
       </p>
       <p>
+        Of course, no agent will be satisfied if we distribute goods randomly.
 
       </p>
 
