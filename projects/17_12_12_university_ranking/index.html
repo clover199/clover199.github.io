@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <title>Emma's Project - Notes on Market </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--styles-->
+    <link rel="stylesheet", href="../../css/index.css"/>
+    <!--icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- fonts for navigation bar -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <!-- MathJax for math display -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 90
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <!--scripts-->
+    <script src="../../script.js"></script>
+    </style>
+    <!-- for google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-102337520-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+
+  <header> </header>
+
+  <nav>
+    <button class="list_button" onclick="show_nav_bar()"> <i class="glyphicon glyphicon-list"></i> </button>
+    <div id="navlist" class="menue">
+      <a href="../../index.html">Home</a>
+      <a href="../index.html">Projects</a>
+      <a href="../../about.html">About</a>
+      <a href="../../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section>
+    <h1>Notes on Market</h1>
+      <time> 11-29-2017 </time>
+      <p>
+        This is a introduction of market theories based on the course I took this semester
+        and mixed with my own understandings. There are three parts in this post: linear markets,
+        solving linear markets with Lemke algorithm, and welfare theorems.
+      </p>
+      <h2>Market</h2>
+      <p>
+        We work to earn money; and we use money to buy what we need. There are a lot
+        of products in the market. How does the market set prices for each product?
+        A quick thinker may say, products with higher demands will become more expensive.
+        Another may say, rare items like diamonds always have high prices.
+      </p>
+      <figure>
+        <img src="figs/network.png" alt="network"/>
+      </figure>
+      <p>
+        Proposed by Irving Fisher in 1891 in his Ph.D. thesis, a Fisher market
+        describes a simplified real market which is solvable.
+        Suppose there are \(m\) agents and \(n\) of divisible goods.
+        As shown in the above cartoon, each agent wants to buy some goods
+        (preferences over different goods are indicated by the width of the lines).
+        However, agents have limited budgets \(M_i\) and goods are of limited supply \(S_j\).
+        All agents want to maximize their total satisfactory within their budgets.
+        Suppose agent \(i\) bought a boundle \(x_i=\{x_{i1},\dots,x_{in}\}\).
+        His satisfactory over this boundle is indicated by utility function \(U_i(x_i)\).
+        To make life easier, linear utility functions are used, i.e.
+        \(U_i(x_i) = \sum_{j=1}^n U_{ij}x_j\).
+        Now we have a full description of Fisher market:
+        $$\textrm{Fisher}\{M_i, U_{ij}, S_j\}$$
+        The problem 
+      </p>
+      <p>
+        Of course, no agent will be satisfied if we distribute goods randomly.
+
+      </p>
+
+    <h2> Appendix </h2>
+    <h4>A: </h4>
+      <p>
+        Suppose \(P\) is a functional of \(\{x_i\}\). We want to minimize
+        $$G = \sum_{\{x_i\}} P E + T \sum_{\{x_i\}} P \ln P$$
+        under constraint \(h = \sum_{\{x_i\}} P -1\).
+        Using Lagrange multiplier, we transform the problem to be minimizing
+        \(\tilde{G}=G+\lambda h\) without constraints.
+        At minimum, the variant of \(G\) under variant of \(P\) should be zero
+        $$\frac{\delta\tilde{G}}{\delta P} = E + T (\ln P +1) + \lambda = 0 $$
+        The derivative with respect to \(\lambda\) gives back us the original constraint
+        $$ \frac{\partial\tilde{G}}{\partial\lambda} = \sum_{\{x_i\}} P - 1 = 0$$
+        Solve the two equations above, we get
+        $$ P = \frac{1}{Z} e^{-E/T} $$
+        which is Boltzmann distribution. \(\lambda\) is chosen to satisfy the
+        normalization condition and is absorbed into \(Z\).
+      </p>
+    <!-- <h4>B: proof using Jenssen's inequality</h4>
+    Since \(e^{-x}\) is convex. We have
+    $$ \langle e^{-x}\rangle \ge e^{-\langle x\rangle} $$</p>
+    <p>
+      Since KL divergence is always non-negative,
+      It can be approved by Jenssen's inequality
+    </p> -->
+    <h2>References</h2>
+    <p>
+      <ol>
+        <li>Course IE598 (Fall2017): Games, Markets, and Mathematical Programming - by Jugal Garg.
+          <a href="http://jugal.ise.illinois.edu/ie598.html">website</a></li>
+        <li>William Brainard and Herbert Scarf. How to compute equilibrium prices
+          in 1891. Cowles Foundation Discussion Paper, 1270, 2000.
+          <a href="http://dido.wss.yale.edu/~hes/pub/how-to-compute.pdf">pdf</a>)</li>
+      </ol>
+    </p>
+    </section>
+
+    <section class="comment">
+      <h2>Comments</h2>
+
+      <!-- for comments  -->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <div class="fb-comments"
+        data-href="https://clover199.github.io/projects/17_07_02_mean_field_theory"
+        data-numposts="50"></div>
+
+    </section>
+  </main>
+
+  <footer></footer>
+
+  </body>
+
+</html>
