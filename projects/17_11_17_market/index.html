@@ -56,65 +56,299 @@
     <h1>Notes on Market</h1>
       <time> 11-29-2017 </time>
       <p>
-        This is a introduction of market theories based on the course I took this semester
-        and mixed with my own understandings. There are three parts in this post: linear markets,
-        solving linear markets with Lemke algorithm, and welfare theorems.
+        This is a introduction of market theories based on the course I took in 2017 fall.
+        There are mainly two parts in this post:
+        linear markets and Lemke algorithm for solving linear markets.
       </p>
-      <h2>Market</h2>
+      <h2>Fisher Linear Market</h2>
       <p>
-        We work to earn money; and we use money to buy what we need. There are a lot
-        of products in the market. How does the market set prices for each product?
-        A quick thinker may say, products with higher demands will become more expensive.
-        Another may say, rare items like diamonds always have high prices.
+        We work to earn money; and we use money to buy what we need.
+        Most of the time the things we need are affordable such as foods, groceries, etc.
+        On the other hand, there are luxury brands that only targets rich people.
+        Have you ever though of what decides prices of all these things?
+        In 1891, Irving Fisher proposed a simple salvable market model in his Ph.D. thesis.
+        In this section, we will formulate this model mathematically; and we
+        will describe a numerical algorithm for solving this model in a later section.
       </p>
       <figure>
-        <img src="figs/network.png" alt="network"/>
+        <img style='max-width: 500px;' src="figs/network.png" alt="network"/>
       </figure>
       <p>
-        Proposed by Irving Fisher in 1891 in his Ph.D. thesis, a Fisher market
-        describes a simplified real market which is solvable.
-        Suppose there are \(m\) agents and \(n\) of divisible goods.
+        A Fisher market describes a simplified real market which is solvable.
+        Suppose there are \(m\) agents and \(n\) of divisible goods in a market.
         As shown in the above cartoon, each agent wants to buy some goods
         (preferences over different goods are indicated by the width of the lines).
-        However, agents have limited budgets \(M_i\) and goods are of limited supply \(S_j\).
+        However, agents have limited budgets \(M_i\) and number of goods \(S_j\) is not infinite.
         All agents want to maximize their total satisfactory within their budgets.
-        Suppose agent \(i\) bought a boundle \(x_i=\{x_{i1},\dots,x_{in}\}\).
-        His satisfactory over this boundle is indicated by utility function \(U_i(x_i)\).
+        Suppose agent \(i\) bought a boundle of goods \(x_i=\{x_{i1},\dots,x_{in}\}\).
+        His satisfactory over this boundle is indicated by a utility function \(U_i(x_i)\).
         To make life easier, linear utility functions are used, i.e.
         \(U_i(x_i) = \sum_{j=1}^n U_{ij}x_j\).
-        Now we have a full description of Fisher market:
+      </p>
+      <p>
+        Now we have a full description of the Fisher market:
         $$\textrm{Fisher}\{M_i, U_{ij}, S_j\}$$
-        The problem 
+      </p>
+      <ul>
+        <li>\(M_i\): budget of each agent \(i\) with \(m\) agents in total.</li>
+        <li>\(U_{ij}\): utility function of agent \(i\) over good \(j\).</li>
+        <li>\(S_j\): units of divisible good \(j\) with \(n\) kinds of goods in total.</li>
+      </ul>
+      <p>
+        The problem is to find the best \(\{x_{ij},P_j\}\) that maximizes utility
+        functions of all agents. We say market is at equilibrium when market clears,
+        i.e. all agents reaches their budget and all goods are sold.
+        Now we can state the problem as an optimization problem
+        $$\begin{split}
+        \max\sum_{j=1}^n & U_{ij} x_{ij}\quad\forall i\quad\textrm{with constrains}\\
+        \sum_{j=1}^n & P_{j} x_{ij} = M_i\\
+        \sum_{i=1}^m & x_{ij} = S_j \\
+        & P_j>0 \\
+        & x_{ij}\ge0
+        \end{split}$$
+      </p>
+      <h2>Exchange Market</h2>
+      <p>
+        It turns out that Fisher linear market is a special case of a more general
+        market model: exchange market. In exchange market, no money is used.
+        Every agent comes with some goods; and they exchange goods directly.
+        This is exactly what people did when money was not invented.
       </p>
       <p>
-        Of course, no agent will be satisfied if we distribute goods randomly.
-
+        We formulate exchange market as the following.
+        $$\textrm{Exchange}\{W_{ij}, U_{ij}\}$$
       </p>
-
-    <h2> Appendix </h2>
-    <h4>A: </h4>
+      <ul>
+        <li>\(W_{ij}\): agent \(i\) has \(W_{ij}\) units of good \(j\).</li>
+        <li>\(U_{ij}\): utility function of agent \(i\) over good \(j\).</li>
+      </ul>
       <p>
-        Suppose \(P\) is a functional of \(\{x_i\}\). We want to minimize
-        $$G = \sum_{\{x_i\}} P E + T \sum_{\{x_i\}} P \ln P$$
-        under constraint \(h = \sum_{\{x_i\}} P -1\).
-        Using Lagrange multiplier, we transform the problem to be minimizing
-        \(\tilde{G}=G+\lambda h\) without constraints.
-        At minimum, the variant of \(G\) under variant of \(P\) should be zero
-        $$\frac{\delta\tilde{G}}{\delta P} = E + T (\ln P +1) + \lambda = 0 $$
-        The derivative with respect to \(\lambda\) gives back us the original constraint
-        $$ \frac{\partial\tilde{G}}{\partial\lambda} = \sum_{\{x_i\}} P - 1 = 0$$
-        Solve the two equations above, we get
-        $$ P = \frac{1}{Z} e^{-E/T} $$
-        which is Boltzmann distribution. \(\lambda\) is chosen to satisfy the
-        normalization condition and is absorbed into \(Z\).
+        Note that there is redundant information in this formulation.
+        We can always change the unit of goods and rescale \(U_{ij}\) accordingly.
+        If we request \(\sum_i W_{ij}=1\), i.e. measure goods in units of
+        \(S_j=\sum_{i} W_{ij}\).
+        Then \(U_{ij}\) should be replaced by \(U_{ij}S_j\).
       </p>
-    <!-- <h4>B: proof using Jenssen's inequality</h4>
-    Since \(e^{-x}\) is convex. We have
-    $$ \langle e^{-x}\rangle \ge e^{-\langle x\rangle} $$</p>
-    <p>
-      Since KL divergence is always non-negative,
-      It can be approved by Jenssen's inequality
-    </p> -->
+      <p>
+        Fisher market can be easily converted to exchange market.
+        If we treat market as an additional agent and money as an additional good,
+        then Fisher market becomes exchange market automatically.
+        What if we do not want to change the number of agents nor goods?
+        We can still do it.
+        Note that the budget \(M_i\) of each agent indicates his/her buying ability.
+        We can first distribute goods according to the agents' buying abilities
+        discarding their utility functions. This is a fair way to distribute goods.
+        Though the agents may not be satisfied with what they get, they do not
+        lose their buying abilities. After this fair distribution, money becomes useless.
+        All agents can get what they want by exchanging goods directly with each other.
+        Mathematically, it is the same as setting
+        $$ W_{ij} = \frac{M_i}{\sum_i M_i} S_j $$
+      </p>
+      <p>
+        Similar with Fisher linear market, the exchange market also has equilibrium
+        \(\{x_{ij}, P_{ij}\}\), which is a solution of
+        $$\begin{split}
+        \max \sum_{j=1}^n & U_{ij} x_{ij}\quad\forall i\quad\textrm{with constrains}\\
+        \sum_{j=1}^n & P_{j} x_{ij} = \sum_{j=1}^n P_{j} W_{ij} \\
+        \sum_{i=1}^m & x_{ij} = \sum_{i=1}^m W_{ij} = 1\\
+        & P_j>0 \\
+        & x_{ij}\ge0
+        \end{split}$$
+        Rescaling the equilibrium price of exchange market has no effects
+        on other values. To get the equilibrium price for Fisher linear market,
+        we only need to rescale the price according to the total money brought to
+        the market, i.e. set \(\sum_j P_j S_j = \sum_i M_i\).
+        Then we can restore the previous conditions with:
+        $$ \sum_i W_{ij} = S_j, \quad\quad \sum_j P_j W_{ij} = M_i .$$
+      </p>
+      <p>
+        The exchange market is more general than Fisher market.
+        If an exchange market can be converted to Fisher market,
+        it has to satisfy \(W_{ij} = a_ib_j\)
+        (matrix \(W\) is a product of a column vector \(a\) and a row vector \(b\)).
+        There is always equilibrium for Fisher market,
+        but exchange market may not have equilibrium.
+      </p>
+      <h2>Linear Complementarity Problems (LCP)</h2>
+      <p>
+        Before we try to find solutions of the exchange market,
+        we first define linear complementarity problems (LCP).
+        Later we will show that exchange market problems are LCP.
+        As an algorithm for LCP, Lemke algorithm can be used
+        to solve exchange market problems.
+      </p>
+      <p>
+        Given a \(n\times n\) matrix \(A\) and a \(n\times 1\) vector \(q\),
+        a LCP is defined by
+        $$ Ay - q \le 0 \;\perp\; y\ge0.$$
+        Here, \(y\) is the solution vector of length \(n\) we want to find.
+        We use \(\perp\) to indicate the complementarity condition \(y^{T}(Ay-q)=0\).
+        With the inequality constrains, this implies \(y_i (Ay-q)_i=0\) for all \(i\).
+      </P>
+      <p>
+        When \(q_i\ge0\) for all \(i\), we can easily get the trivial solution \(y_i=0\).
+        Then we can use the Lemke-Howson algorithm (we will describe it later)
+        to find another nontrivial solution.
+        To find all solutions, we can use support enumeration algorithm
+        (we will not talk about this algorithm in this post).
+        When some \(q_i\) are negative, we can still apply the Lemke-Howson algorithm,
+        but with a little modification.
+        We add a non-zero number \(z\) to the original problem.
+        $$ \begin{split}
+        Ay-&z-q \le 0 \;\perp\; y\ge0\\
+        & \quad z\ge0
+        \end{split}$$
+        Then a trivial solution is \(z=\infty\), \(y_i=0\).
+        Start from this trivial solution, we can use the Lemke-Howson algorith to
+        find a solution with \(z=0\).
+        Lemke algorithm implements this idea and solves the problem.
+      </P>
+      <h3>Lemke-Howson algorithm</h3>
+      <p>
+        The conditions \(My\le q\) and \(y_i\ge0\) forms a convex polyhedron
+        in the \(n\) dimension space.
+        Assume the polyhedron is bounded (polytope),
+        otherwise the algorithm doesn't work.
+        We label conditions \(My\le q\) from 1 to \(n\),
+        and the complementary conditions \(y\ge0\) from 1' to \(n\)'.
+        Since a vertex is determined by \(n\) equalities,
+        we label vertices of the polytope with condition labels when equality is taken.
+        Then each vertex has a label (\(l_1,\dots,l_n\)),
+        where \(l_i \in \{1,\dots,n,1',\dots,n'\}\).
+        The solutions are vertices with no repetitive numbers (ignore prime).
+      </p>
+      <p>
+        For example, we take \(n=2\) and choose conditions
+        $$\begin{split}
+        & (1)\quad 2y_1 - y_2 \le 2 \;\perp\; y_1 \ge0 \\
+        & (2)\quad y_1 + 2y_2 \le 3 \;\perp\; y_2 \ge0
+        \end{split}$$
+        The corresponding polytope is shown in the figure below.
+        Lines with the same color are complementary conditions.
+        The shades of a line indicate the half plane satisfying the inequality.
+        Vertices are highlighted and associated with labels.
+        Solid dots are solutions while circles are not.
+      </p>
+      <figure>
+        <img src="figs/LemkeHowson.png" alt="Example"/>
+      </figure>
+      <p>
+        Lemke-Howson algorithm is guaranteed to find one non-trivial solution.
+        Start from the trivial solution \(y_i=0\) and choose a label \(k\in\{1,\dots,n\}\).
+      </p>
+      <ol>
+        <li>set initial vertex as \(y=(0,\dots,0)\), which has label (\(1',\dots,n'\))</li>
+        <li>relax equation \(k'\), i.e. \(y_k=0\) and find the other vertex \(y'\) of the edge.</li>
+        <li>find index \(j\) of the newly satisfied equation;
+          then vertex \(y'\) has label \((1',\dots,(k-1)',j,(k+1)',\dots,n')\)</li>
+        <li>while label of vertex \(y'\) has duplicating index \(j\)
+          <ul>
+            <li>relax equation \(j'\) and find the label of next vertex \(y'\).</li>
+          </ul>
+        </li>
+        <li>\(y'\) is a solution of the LCP</li>
+      </ol>
+      <p>
+        The algorithm creates a path from initial trivial solution to another solution.
+        In the above example, if we choose \(k=1\), then the path is
+        \((1',2')\to(2,2')\to(1,2)\).
+        It is easy to show that
+        the vertices within a path has no \(k\) or \(k'\) in their labels.
+        The two edge vertices of a path have labels that include all numbers.
+        Therefore only the two edge vertices are solutions of the LCP.
+        When \(k\) is given then the path is unique.
+        There cannot be crossings in a path.
+        Since every vertices can be accessed at most once,
+        the worst running time of this algorithm scales as the number of vertices.
+      </p>
+      <h3>Lemke algorithm</h3>
+      <p>
+        Lemke-Howson algorithm only works when \(q\) is non-negative.
+        When \(q\) has negative elements, we cannot choose \(y_i=0\) as the starting solution.
+        But we can modify the problem by adding a positive number \(z\) to \(q\),
+        so that \(q_i+z\) are all non-negative.
+      </p>
+      <p>
+        As mentioned before, \(y_i=0\) and \(z=\infty\) is a solution.
+        In fact, \(y_i=0\) and \(z\ge\max(-q_i)\) is a solution.
+        This solution is a ray, not a vertex. We call it the primary ray.
+        There may be other rays in the polyhedron.
+        They are called secondary rays.
+        For market problems, no secondary rays exist.
+      </p>
+      <p>
+        Similar with Lemke-Howson algorithm, we start from a trial solution vertex
+        then move along edges of polyhedron to find the solution we want.
+        In Lemke algorithm, the starting vertex satisfies \(y_i=0\) and \(z=\max(-q_i)\).
+        Then the condition \((Ay-z-q)_i=0\) automatically satisfies.
+        Therefore, the starting vertex has label \((1',\dots,i',i,(i+1)',\dots,n')\).
+        Note that the space dimension is \(n+1\) instead of \(n\),
+        so we always have two same numbers in a label.
+        However, there is one condition without label \(z\ge0\).
+        If we label this condition as 0, then the solution we want is again
+        a vertex with no repeating numbers.
+      </p>
+      <figure>
+        <img style='max-width: 400px;' src="figs/Lemke.png" alt="Example"/>
+      </figure>
+      <p>
+        We consider an example with \(n=6\).
+        The illustration is shown in the above plot.
+        Since it is not easy to plot a high dimensional space on a 2D plane,
+        we use one direction for values of \(z\)
+        and the other for the vector space \(\{y_1,\dots,y_n\}\).
+        The vertices are associated with labels.
+        Arrows indicate the direction of the path.
+      </p>
+      <p>
+        The running time of the Lemke algorithm is linear in number of vertices.
+        It can be easily proven by the fact that each vertex can only be
+        accessed once along the path.
+        The actual running time is in fact faster for most cases.
+      </p>
+      <h3>LCP Formulation of the Exchange Market</h3>
+      <p>
+        Now we know how to solve a LCP using the Lemke algorithm.
+        However, neither the Fisher linear market or the exchange market is a LCP.
+        We need complementary conditions and transform equality constrains into inequalities.
+      </p>
+      <p>
+        We first define auxiliary parameters
+        $$ \begin{split}
+        \frac{1}{\lambda_i} & = \max_k\frac{U_{ik}}{P_k} \\
+        f_{ij} & = x_{ij} P_j \\
+        \tilde{P}_j & = P_j-1
+        \end{split}$$
+        Here \(\lambda_i\) is the minimum money agent \(i\) need to pay
+        for one unit of satisfactory.
+        \(f_{ij}\) is the money agent \(i\) paid for good \(j\).
+        It is defined to remove the non-linearity.
+        We define \(\tilde{P}_j\), so that constraint \(P_j>0\) can be
+        written as \(\tilde{P}_j\ge0\).
+      </p>
+      <p>
+        To reach maximum satisfactory for each agent we notice that
+        an agent \(i\) only buy goods whose value match \(\lambda_i\).
+        Therefore, we get our first complementary constraint
+        $$ \lambda_iU_{ij} - (\tilde{P}_j+1) \le 0 \;\perp\; f_{ij} \ge 0$$
+      </p>
+      <p>
+        The market clear constraints can be written with \(\{f_{ij},\tilde{P}_j\}\) as
+        $$\begin{split}
+        & \sum_i^m f_{ij} \le (\tilde{P}_j+1)\\
+        & \sum_j^n f_{ij} \ge \sum_j^n W_{ij}(\tilde{P}_j+1)
+        \end{split}$$
+        With \(\sum_i W_{ij}=1\) we can easily see that both inequalities are strict.
+        We can add redundant complementarily constraints with these inequalities.
+        This gives us the LCP formulation of market problems
+        $$\begin{split}
+        - \tilde{P}_j + U_{ij}\lambda_i \le 1 & \;\perp\; f_{ij} \ge 0 \\
+        \sum_i^m f_{ij} - \tilde{P}_j \le 1 & \;\perp\; \tilde{P}_j \ge 0 \\
+        -\sum_j^n f_{ij} + \sum_j^n W_{ij} \tilde{P}_j \le -\sum_j^n W_{ij} & \;\perp\; \lambda_i \ge 0
+        \end{split}$$
+        This problem has no secondary ray.
+        Thus the Lemke algorithm converges to the market equilibrium.
+      </p>
     <h2>References</h2>
     <p>
       <ol>

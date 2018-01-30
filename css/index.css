@@ -84,6 +84,7 @@ main {
   max-width: 800px;
   margin: auto;
   padding: 80px 15px 30px 15px;
+  font-size: 20px;
 }
 main p{
   font-size: 20px;
@@ -163,6 +164,7 @@ main .projects a{
   }
   main {
     padding: 10px;
+    font-size: 14px;
   }
   main p{
     font-size: 14px;
