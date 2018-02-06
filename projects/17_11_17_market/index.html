@@ -56,9 +56,9 @@
     <h1>Notes on Market</h1>
       <time> 01-29-2018 </time>
       <p>
-        This is a introduction of market theories based on the course I took in 2017 fall.
+        This is a introduction of limear market models based on the course I took in 2017 fall.
         There are mainly two parts in this post:
-        linear markets and Lemke algorithm for solving linear markets.
+        linear markets and Lemke algorithm for solving linear markets numerically.
       </p>
       <h2>Fisher Linear Market</h2>
       <p>
@@ -66,8 +66,8 @@
         Most of the time the things we need are affordable such as foods, groceries, etc.
         On the other hand, there are luxury brands that only targets rich people.
         Have you ever though of what decides prices of all these things?
-        In 1891, Irving Fisher proposed a simple salvable market model in his Ph.D. thesis.
-        In this section, we will formulate this model mathematically; and we
+        In 1891, Irving Fisher proposed a simple solvable market model in his Ph.D. thesis.
+        In this section, we will formulate this model mathematically following him; and we
         will describe a numerical algorithm for solving this model in a later section.
       </p>
       <figure>
@@ -75,10 +75,10 @@
       </figure>
       <p>
         A Fisher market describes a simplified real market which is solvable.
-        Suppose there are \(m\) agents and \(n\) of divisible goods in a market.
+        Suppose there are \(m\) agents and \(n\) types of divisible goods in a market.
         As shown in the above cartoon, each agent wants to buy some goods
         (preferences over different goods are indicated by the width of the lines).
-        However, agents have limited budgets \(M_i\) and number of goods \(S_j\) is not infinite.
+        However, agents have limited budgets \(M_i\) and numbers of goods \(S_j\) are not infinite.
         All agents want to maximize their total satisfactory within their budgets.
         Suppose agent \(i\) bought a boundle of goods \(x_i=\{x_{i1},\dots,x_{in}\}\).
         His satisfactory over this boundle is indicated by a utility function \(U_i(x_i)\).
@@ -96,8 +96,8 @@
       </ul>
       <p>
         The problem is to find the best \(\{x_{ij},P_j\}\) that maximizes utility
-        functions of all agents. We say market is at equilibrium when market clears,
-        i.e. all agents reaches their budget and all goods are sold.
+        functions of all agents. We say the market reaches equilibrium when it clears,
+        i.e. all agents reaches their budgets and all goods are sold.
         Now we can state the problem as an optimization problem
         $$\begin{split}
         \max\sum_{j=1}^n & U_{ij} x_{ij}\quad\forall i\quad\textrm{with constrains}\\
@@ -125,8 +125,8 @@
       <p>
         Note that there is redundant information in this formulation.
         We can always change the unit of goods and rescale \(U_{ij}\) accordingly.
-        If we request \(\sum_i W_{ij}=1\), i.e. measure goods in units of
-        \(S_j=\sum_{i} W_{ij}\).
+        We set \(\sum_i W_{ij}=1\), i.e. measure goods in units of
+        total number of goods \(S_j=\sum_{i} W_{ij}\),
         Then \(U_{ij}\) should be replaced by \(U_{ij}S_j\).
       </p>
       <p>
@@ -145,7 +145,7 @@
         $$ W_{ij} = \frac{M_i}{\sum_i M_i} S_j $$
       </p>
       <p>
-        Similar with Fisher linear market, the exchange market also has equilibrium
+        Similar with the Fisher linear market, the exchange market also has equilibrium
         \(\{x_{ij}, P_{ij}\}\), which is a solution of
         $$\begin{split}
         \max \sum_{j=1}^n & U_{ij} x_{ij}\quad\forall i\quad\textrm{with constrains}\\
@@ -174,7 +174,7 @@
         Before we try to find solutions of the exchange market,
         we first define linear complementarity problems (LCP).
         Later we will show that exchange market problems are LCP.
-        As an algorithm for LCP, Lemke algorithm can be used
+        As an algorithm for LCP, the Lemke algorithm can be used
         to solve exchange market problems.
       </p>
       <p>
@@ -205,23 +205,24 @@
       </P>
       <h3>Lemke-Howson algorithm</h3>
       <p>
-        The conditions \(My\le q\) and \(y_i\ge0\) forms a convex polyhedron
-        in the \(n\) dimension space.
+        The conditions \(Ay\le q\) and \(y_i\ge0\) forms a convex polyhedron
+        in the \(n\) dimensional space.
         Assume the polyhedron is bounded (polytope),
-        otherwise the algorithm doesn't work.
-        We label conditions \(My\le q\) from 1 to \(n\),
+        otherwise the algorithm may not find a solution.
+        We label conditions \(Ay\le q\) from 1 to \(n\),
         and the complementary conditions \(y\ge0\) from 1' to \(n\)'.
-        Since a vertex is determined by \(n\) equalities,
-        we label vertices of the polytope with condition labels when equality is taken.
+        Since a vertex is determined by at least \(n\) equalities,
+        we label vertices of the polytope with labels of tight inequalities.
         Then each vertex has a label (\(l_1,\dots,l_n\)),
         where \(l_i \in \{1,\dots,n,1',\dots,n'\}\).
-        The solutions are vertices with no repetitive numbers (ignore prime).
+        The solutions are then vertices with labels including all numbers from 1 to \(n\)
+        (ignore whether it has prime or not).
       </p>
       <p>
         For example, we take \(n=2\) and choose conditions
         $$\begin{split}
-        & (1)\quad 2y_1 - y_2 \le 2 \;\perp\; y_1 \ge0 \\
-        & (2)\quad y_1 + 2y_2 \le 3 \;\perp\; y_2 \ge0
+        & (1)\quad y_1 + 2y_2 \le 3 \;\perp\; y_1 \ge0 \\
+        & (2)\quad 2y_1 - y_2 \le 2 \;\perp\; y_2 \ge0
         \end{split}$$
         The corresponding polytope is shown in the figure below.
         Lines with the same color are complementary conditions.
@@ -238,7 +239,9 @@
       </p>
       <ol>
         <li>set initial vertex as \(y=(0,\dots,0)\), which has label (\(1',\dots,n'\))</li>
-        <li>relax equation \(k'\), i.e. \(y_k=0\) and find the other vertex \(y'\) of the edge.</li>
+        <li>relax equation \(k'\), so we can move along the edge defined by
+          \(y_j=0\) for \(j\neq k\) and \(y_k\ge0\)</li>
+        <li>find the other vertex \(y'\) of the edge.</li>
         <li>find index \(j\) of the newly satisfied equation;
           then vertex \(y'\) has label \((1',\dots,(k-1)',j,(k+1)',\dots,n')\)</li>
         <li>while label of vertex \(y'\) has duplicating index \(j\)
@@ -269,30 +272,48 @@
         so that \(q_i+z\) are all non-negative.
       </p>
       <p>
-        As mentioned before, \(y_i=0\) and \(z=\infty\) is a solution.
-        In fact, \(y_i=0\) and \(z\ge\max(-q_i)\) is a solution.
-        This solution is a ray, not a vertex. We call it the primary ray.
-        There may be other rays in the polyhedron.
-        They are called secondary rays.
-        For market problems, no secondary rays exist.
+        $$ \begin{split}
+        Ay-&z-q \le 0 \;\perp\; y\ge0\\
+        & \quad z\ge0
+        \end{split}$$
+        As mentioned before, \(y_i=0\) and \(z=\infty\) is a solution of this new problem.
+        In fact, all points on \(y_i=0\) and \(z\ge\max(-q_i)\) are solutions.
+        These solutions form a ray, called the primary ray.
       </p>
       <p>
-        Similar with Lemke-Howson algorithm, we start from a trial solution vertex
+        Similar with the Lemke-Howson algorithm, we start from a trial solution vertex
         then move along edges of polyhedron to find the solution we want.
-        In Lemke algorithm, the starting vertex satisfies \(y_i=0\) and \(z=\max(-q_i)\).
+        In the Lemke algorithm, the starting vertex satisfies \(y_i=0\) and \(z=\max(-q_i)\).
         Then the condition \((Ay-z-q)_i=0\) automatically satisfies.
         Therefore, the starting vertex has label \((1',\dots,i',i,(i+1)',\dots,n')\).
         Note that the space dimension is \(n+1\) instead of \(n\),
-        so we always have two same numbers in a label.
-        However, there is one condition without label \(z\ge0\).
-        If we label this condition as 0, then the solution we want is again
-        a vertex with no repeating numbers.
+        so we always have two same numbers in a label if \(z\neq0\).
+        We want a solution with \(z=0\),
+        so the solution vertex is again labeled with no repeating numbers.
+      </p>
+      <p>
+        In both the Lemke-Howson and the Lemke algorithms, we find solutions
+        by moving along edges of the polyhedron defined by the constrains.
+        In the Lemke-Howson algorithm, only starting and ending vertices satisfy
+        complementary conditions.
+        However, in the Lemke algorithm all passing edges and vertices are solutions
+        of the new problem with \(z\) included.
+        Only the vertex with \(z=0\) is a solution of the original LCP problem.
+      </p>
+      <p>
+        There are two potential problems of the Lemke algorithm: rays and degeneracies.
+        It is not guaranteed that we will always find a vertex when we move along
+        an edge. These edges stretching to infinity are secondary rays.
+        For market problems, no secondary rays exist.
+        It is possible that the number of tight conditions is larger than the space
+        dimension. In such case the path direction is not uniquely determined.
+        We choose the direction that minimizes \(z\) most.
       </p>
       <figure>
         <img style='max-width: 400px;' src="figs/Lemke.png" alt="Example"/>
       </figure>
       <p>
-        We consider an example with \(n=6\).
+        Consider an example with \(n=6\).
         The illustration is shown in the above plot.
         Since it is not easy to plot a high dimensional space on a 2D plane,
         we use one direction for values of \(z\)
@@ -303,60 +324,222 @@
       <p>
         The running time of the Lemke algorithm is linear in number of vertices.
         It can be easily proven by the fact that each vertex can only be
-        accessed once along the path.
+        accessed at most once along the path.
         The actual running time is in fact faster for most cases.
       </p>
-      <h3>LCP Formulation of the Exchange Market</h3>
+      <h3>Codes</h3>
       <p>
-        Now we know how to solve a LCP using the Lemke algorithm.
-        However, neither the Fisher linear market or the exchange market is a LCP.
-        We need complementary conditions and transform equality constrains into inequalities.
+        In this section, we describe the algorithms in detail and post the python codes.
+        Following notations in previous sections, we define functions Lemke_Howson
+        and Lemke.
+      </p>
+      <pre style="margin: 0; line-height: 125%">
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">Lemke_Howson</span>(A, q, k<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">        This solves the LCP problem: Ay&lt;=q, y&gt;=0, y(Ay-q)=0.</span>
+<span style="color: #DD4422">        All elements of q are non-negative.</span>
+<span style="color: #DD4422">        input:  A:  numpy array of dimension (n,n)</span>
+<span style="color: #DD4422">                q:  numpy array of dimension (n,)</span>
+<span style="color: #DD4422">                k:  integer from 0 to n-1, default to be 0</span>
+<span style="color: #DD4422">        output: y:  numpy array of dimension (n,)</span>
+<span style="color: #DD4422">                    return None if encounter a ray</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+
+    n <span style="color: #333333">=</span> A<span style="color: #333333">.</span>shape[<span style="color: #0000DD; font-weight: bold">0</span>]
+
+    <span style="color: #888888"># Write all linear constraints with one matrix</span>
+    M <span style="color: #333333">=</span> np<span style="color: #333333">.</span>vstack([A, <span style="color: #333333">-</span>np<span style="color: #333333">.</span>identity(n)])
+    b <span style="color: #333333">=</span> np<span style="color: #333333">.</span>hstack([q, np<span style="color: #333333">.</span>zeros(n)])
+
+    <span style="color: #888888"># initial trivial vertex</span>
+    y <span style="color: #333333">=</span> np<span style="color: #333333">.</span>zeros(n)
+    ii <span style="color: #333333">=</span> n<span style="color: #333333">+</span>k
+
+    y, ii <span style="color: #333333">=</span> FindNextVertex(M, b, y, ii)
+    <span style="color: #008800; font-weight: bold">if</span> ii<span style="color: #333333">==-</span><span style="color: #0000DD; font-weight: bold">1</span>:
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">None</span>
+    count <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>    <span style="color: #888888"># store the number of pivotings </span>
+    <span style="color: #008800; font-weight: bold">while</span> ii<span style="color: #333333">!=</span>k <span style="color: #000000; font-weight: bold">and</span> ii<span style="color: #333333">!=</span>n<span style="color: #333333">+</span>k:    <span style="color: #888888"># while label k is not achieved</span>
+        count <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">if</span> ii<span style="color: #333333">&lt;</span>n:
+            y, ii <span style="color: #333333">=</span> FindNextVertex(M, b, y, ii<span style="color: #333333">+</span>n)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            y, ii <span style="color: #333333">=</span> FindNextVertex(M, b, y, ii<span style="color: #333333">-</span>n)
+        <span style="color: #008800; font-weight: bold">if</span> ii<span style="color: #333333">==-</span><span style="color: #0000DD; font-weight: bold">1</span>:
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">None</span>
+    <span style="color: #008800; font-weight: bold">return</span> y
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">Lemke</span>(A, q):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">        This solves the LCP problem: Ay&lt;=q, y&gt;=0, y(Ay-q)=0.</span>
+<span style="color: #DD4422">        input:  A:  numpy array of dimension (n,n)</span>
+<span style="color: #DD4422">                q:  numpy array of dimension (n,) </span>
+<span style="color: #DD4422">                k:  integer from 0 to n-1, default to be 0</span>
+<span style="color: #DD4422">        output: y:  numpy array of dimension (n,)</span>
+<span style="color: #DD4422">                    return None if encounter a ray</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    n <span style="color: #333333">=</span> A<span style="color: #333333">.</span>shape[<span style="color: #0000DD; font-weight: bold">0</span>]
+
+    <span style="color: #888888"># add positive number z to the problem Ay-z&lt;=q</span>
+    <span style="color: #888888"># Write all linear constraints with one matrix</span>
+    M <span style="color: #333333">=</span> np<span style="color: #333333">.</span>vstack([np<span style="color: #333333">.</span>hstack([A, <span style="color: #333333">-</span>np<span style="color: #333333">.</span>ones([n,<span style="color: #0000DD; font-weight: bold">1</span>])]), <span style="color: #333333">-</span>np<span style="color: #333333">.</span>identity(n<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span>)])
+    b <span style="color: #333333">=</span> np<span style="color: #333333">.</span>hstack([q, np<span style="color: #333333">.</span>zeros(n<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span>)])
+
+    <span style="color: #888888"># starting vertex</span>
+    y <span style="color: #333333">=</span> np<span style="color: #333333">.</span>zeros(n<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span>)
+    ii <span style="color: #333333">=</span> np<span style="color: #333333">.</span>argmin(q)
+    y[n] <span style="color: #333333">=</span> np<span style="color: #333333">.</span>max(<span style="color: #333333">-</span>q[ii], <span style="color: #0000DD; font-weight: bold">0</span>)
+
+    count <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>    <span style="color: #888888"># store the number of pivotings </span>
+    <span style="color: #008800; font-weight: bold">while</span> y[n]<span style="color: #333333">&gt;</span>epsilon:    <span style="color: #888888"># while z is not zero</span>
+        count <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">if</span> ii<span style="color: #333333">&lt;</span>n:
+            y, ii <span style="color: #333333">=</span> FindNextVertex(M, b, y, ii<span style="color: #333333">+</span>n)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            y, ii <span style="color: #333333">=</span> FindNextVertex(M, b, y, ii<span style="color: #333333">-</span>n)
+        <span style="color: #008800; font-weight: bold">if</span> ii<span style="color: #333333">==-</span><span style="color: #0000DD; font-weight: bold">1</span>:
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">None</span>
+    <span style="color: #008800; font-weight: bold">return</span> y[:n]</pre>
+      <p>
+        The key step is to find the next vertex,
+        which is defined in function <b>FindNextVertex</b>.
+        Before we come to this function, we review a few things in geometry.
+        Suppose \(x\) represents a point in space \(\mathbb{R}^n\).
+        <ul>
+          <li>The linear function \(w^Tx=a\) defines a plane.
+            Vector \(w\) gives the norm direction of the plane.
+            It points out of the area \(w^Tx\le a\)</li>
+          <li>The intercept of \(n\) non-parallel planes is a point in the space.
+            Given a non-singular \(n\times n\) matrix \(M\),
+            inequality \(Mx\le q\) defines a vertex of a polyhedron.
+            The directions of edges from this vertex are columns of \(-M^{-1}\)</li>
+        </ul>
       </p>
       <p>
-        We first define auxiliary parameters
-        $$ \begin{split}
-        \frac{1}{\lambda_i} & = \max_k\frac{U_{ik}}{P_k} \\
-        f_{ij} & = x_{ij} P_j \\
-        \tilde{P}_j & = P_j-1
-        \end{split}$$
-        Here \(\lambda_i\) is the minimum money agent \(i\) need to pay
-        for one unit of satisfactory.
-        \(f_{ij}\) is the money agent \(i\) paid for good \(j\).
-        It is defined to remove the non-linearity.
-        We define \(\tilde{P}_j\), so that constraint \(P_j>0\) can be
-        written as \(\tilde{P}_j\ge0\).
+        Start from a vertex \(v\) and an edge directing to \(d\),
+        we want to find the other vertex.
+        Suppose we know that a plane \(w^Tx=a\) cut the edge.
+        Then it must satisfy \(d^Tw>0\).
+        The new vertex must be \(v+\beta d\) for some \(\beta\).
+        Since it is a point on the plane, we can solve \(\beta\) from
+        \(w^T(v+\beta d)=a\). Following is the code to find the next vertex.
       </p>
-      <p>
-        To reach maximum satisfactory for each agent we notice that
-        an agent \(i\) only buy goods whose value match \(\lambda_i\).
-        Therefore, we get our first complementary constraint
-        $$ \lambda_iU_{ij} - (\tilde{P}_j+1) \le 0 \;\perp\; f_{ij} \ge 0$$
-      </p>
-      <p>
-        The market clear constraints can be written with \(\{f_{ij},\tilde{P}_j\}\) as
-        $$\begin{split}
-        & \sum_i^m f_{ij} \le (\tilde{P}_j+1)\\
-        & \sum_j^n f_{ij} \ge \sum_j^n W_{ij}(\tilde{P}_j+1)
-        \end{split}$$
-        With \(\sum_i W_{ij}=1\) we can easily see that both inequalities are strict.
-        We can add redundant complementarily constraints with these inequalities.
-        This gives us the LCP formulation of market problems
-        $$\begin{split}
-        - \tilde{P}_j + U_{ij}\lambda_i \le 1 & \;\perp\; f_{ij} \ge 0 \\
-        \sum_i^m f_{ij} - \tilde{P}_j \le 1 & \;\perp\; \tilde{P}_j \ge 0 \\
-        -\sum_j^n f_{ij} + \sum_j^n W_{ij} \tilde{P}_j \le -\sum_j^n W_{ij} & \;\perp\; \lambda_i \ge 0
-        \end{split}$$
-        This problem has no secondary ray.
-        Thus the Lemke algorithm converges to the market equilibrium.
-      </p>
+<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">FindNextVertex</span>(M, b, v, k):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">        Find the next vertex of polyhedron Mv&lt;=b from the current vertex v </span>
+<span style="color: #DD4422">        by relaxing tight constrain with index k</span>
+<span style="color: #DD4422">        input:  M:  numpy array of dimension (m, n)</span>
+<span style="color: #DD4422">                b:  numpy array of dimension (m,)</span>
+<span style="color: #DD4422">                v:  numpy array of dimension (n,)</span>
+<span style="color: #DD4422">                k:  integer from 0 to n-1</span>
+<span style="color: #DD4422">        output: v:  numpy array of dimension (n,)</span>
+<span style="color: #DD4422">                k:  integer from 0 to n-1</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+
+    <span style="color: #888888"># index of tight inequalities</span>
+    tight <span style="color: #333333">=</span> np<span style="color: #333333">.</span>argwhere( np<span style="color: #333333">.</span>abs(M<span style="color: #333333">.</span>dot(v)<span style="color: #333333">-</span>b) <span style="color: #333333">&lt;</span> epsilon )<span style="color: #333333">.</span>ravel()
+
+    <span style="color: #888888"># find direction of the edge</span>
+    dire <span style="color: #333333">=</span> <span style="color: #333333">-</span>np<span style="color: #333333">.</span>linalg<span style="color: #333333">.</span>inv(M[tight,:])[:, <span style="color: #007020">list</span>(tight)<span style="color: #333333">.</span>index(k)]
+
+    betamin <span style="color: #333333">=</span> np<span style="color: #333333">.</span>inf
+    <span style="color: #008800; font-weight: bold">for</span> i, w <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">enumerate</span>(M):
+        alpha <span style="color: #333333">=</span> np<span style="color: #333333">.</span>dot(w, dire)
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #000000; font-weight: bold">not</span> i <span style="color: #000000; font-weight: bold">in</span> tight) <span style="color: #000000; font-weight: bold">and</span> (alpha<span style="color: #333333">&gt;</span><span style="color: #0000DD; font-weight: bold">0</span>):
+            beta <span style="color: #333333">=</span> (b[i]<span style="color: #333333">-</span>np<span style="color: #333333">.</span>dot(w,v)) <span style="color: #333333">/</span> alpha
+            <span style="color: #008800; font-weight: bold">if</span> beta<span style="color: #333333">&lt;</span>betamin:
+                betamin <span style="color: #333333">=</span> beta
+                k <span style="color: #333333">=</span> i
+    <span style="color: #008800; font-weight: bold">if</span> betamin <span style="color: #000000; font-weight: bold">is</span> np<span style="color: #333333">.</span>inf:
+        <span style="color: #008800; font-weight: bold">return</span> v, <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>
+    <span style="color: #008800; font-weight: bold">if</span> verbose:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;start from&quot;</span>, v, <span style="background-color: #fff0f0">&quot;end at&quot;</span>, v<span style="color: #333333">+</span>betamin<span style="color: #333333">*</span>dire)
+    v <span style="color: #333333">=</span> v<span style="color: #333333">+</span>betamin<span style="color: #333333">*</span>dire
+    <span style="color: #008800; font-weight: bold">return</span> v, k</pre>
+
+    <h3>LCP Formulation of the Exchange Market</h3>
+    <p>
+      Now we know how to solve a LCP using the Lemke algorithm.
+      However, neither the Fisher linear market or the exchange market is a LCP.
+      We need complementary conditions and transform equality constrains into inequalities.
+    </p>
+    <p>
+      We first define auxiliary parameters
+      $$ \begin{split}
+      \frac{1}{\lambda_i} & = \max_k\frac{U_{ik}}{P_k} \\
+      f_{ij} & = x_{ij} P_j \\
+      \tilde{P}_j & = P_j-1
+      \end{split}$$
+      Here \(\lambda_i\) is the minimum money agent \(i\) need to pay
+      for one unit of satisfactory.
+      \(f_{ij}\) is the money agent \(i\) paid for good \(j\).
+      It is defined to remove the non-linearity.
+      We define \(\tilde{P}_j\), so that constraint \(P_j>0\) can be
+      written as \(\tilde{P}_j\ge0\).
+    </p>
+    <p>
+      To reach maximum satisfactory for each agent we notice that
+      an agent \(i\) only buy goods whose value matches \(\lambda_i\).
+      Therefore, we get our first complementary constraint
+      $$ \lambda_iU_{ij} - (\tilde{P}_j+1) \le 0 \;\perp\; f_{ij} \ge 0$$
+    </p>
+    <p>
+      The market clear constraints can be written with \(\{f_{ij},\tilde{P}_j\}\) as
+      $$\begin{split}
+      & \sum_i^m f_{ij} \le (\tilde{P}_j+1)\\
+      & \sum_j^n f_{ij} \ge \sum_j^n W_{ij}(\tilde{P}_j+1)
+      \end{split}$$
+      With \(\sum_i W_{ij}=1\) we can easily see that both inequalities are strict.
+      We can add redundant complementarily constraints with these inequalities.
+    </p>
+    <p>
+      Since we have \(-\sum_j^n W_{ij}\) as part of \(q\) vector,
+      we add auxiliary parameter \(z\) to the problem.
+      Note that \(z\) is only added to all the inequalities.
+      Now, we have the LCP formulation of market problems
+      $$\begin{split}
+      - \tilde{P}_j + U_{ij}\lambda_i \le 1 & \;\perp\; f_{ij} \ge 0 \\
+      \sum_i^m f_{ij} - \tilde{P}_j \le 1 & \;\perp\; \tilde{P}_j \ge 0 \\
+      -\sum_j^n f_{ij} + \sum_j^n W_{ij} \tilde{P}_j - z \le -\sum_j^n W_{ij} & \;\perp\; \lambda_i \ge 0
+      \end{split}$$
+      This problem has no secondary ray.
+      Thus the Lemke algorithm converges to the market equilibrium.
+    </p>
+    <p>
+      Now we try to solve a simple Fisher linear market:
+      $$M=\left(\begin{array}[cc]
+      &10 \\
+      10 \\
+      \end{array}\right),\quad
+      U=\left(\begin{array}[cc]
+      &1 & 0 \\
+      2 & 1 \\
+      \end{array}\right),\quad
+      S =\left(\begin{array}[cc]
+      &1 & 1 \\
+      \end{array}\right)$$
+      By running the program (<a href="../../codes/market_lemke.py">link</a>),
+      we get the solution at the 5th vertex.
+      $$x=\left(\begin{array}[cc]
+      &3/4 & 0 \\
+      1/4 & 1 \\
+      \end{array}\right),\quad
+      P =\left(\begin{array}[cc]
+      &40/3 & 20/3 \\
+      \end{array}\right)$$
+    </p>
     <h2>References</h2>
     <p>
       <ol>
         <li>Course IE598 (Fall2017): Games, Markets, and Mathematical Programming - by Jugal Garg.
-          <a href="http://jugal.ise.illinois.edu/ie598.html">website</a></li>
+          (Course <a href="http://jugal.ise.illinois.edu/ie598.html">website</a>)</li>
         <li>William Brainard and Herbert Scarf. How to compute equilibrium prices
           in 1891. Cowles Foundation Discussion Paper, 1270, 2000.
-          <a href="http://dido.wss.yale.edu/~hes/pub/how-to-compute.pdf">pdf</a>)</li>
+          (<a href="http://dido.wss.yale.edu/~hes/pub/how-to-compute.pdf">pdf</a>)</li>
+        <li>A COMPLEMENTARY PIVOT ALGORITHM FOR MARKET EQUILIBRIUM UNDER SEPARABLE, PIECEWISE-LINEAR
+          CONCAVE UTILITIES.
+          (<a href="https://www.cc.gatech.edu/~vazirani/SPLC.pdf">pdf</a>)</li>
+        <li>All python codes are converted into colored format with <a href="http://hilite.me/">hilite</a></li>
       </ol>
     </p>
     </section>
