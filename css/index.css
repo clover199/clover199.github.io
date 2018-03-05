@@ -12,7 +12,7 @@
 }
 nav .menue {
   max-width: 800px;
-  margin: auto;
+  margin: 0 40px;
   padding: 0;
 }
 nav a {
@@ -81,8 +81,8 @@ nav .list_button {
 
 main {
   font-family: "Times New Roman", Times, serif;
-  max-width: 800px;
-  margin: auto;
+  width: 65%;
+  margin: 0 40px;
   padding: 80px 15px 30px 15px;
   font-size: 20px;
 }
@@ -150,6 +150,15 @@ main #aboutfig {
 }
 main .projects a{
   color: #000000;
+}
+@media only screen and (max-width: 800px) {
+  main{
+    width: 90%;
+    margin: auto;
+  }
+  .table-of-contents {
+    display: none;
+  }
 }
 @media only screen and (max-width: 640px) {
   .transparent {
