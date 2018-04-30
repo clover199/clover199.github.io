@@ -22,8 +22,9 @@ $(document).ready(function(){
     current.attr("id", name)
     current.attr('style', "padding-top:60px;margin-top: -60px")
     ToC +=
-      "<li> <a href='#" + name + "'>" +
-        "&nbsp;".repeat(current.prop("tagName")[1]*4-6) + name +
+      "<li>" + "&nbsp;".repeat(current.prop("tagName")[1]*4-6) +
+      "<a href='#" + name + "'>" +
+        name +
       "</a> </li>";
   });
 
