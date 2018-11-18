@@ -39,19 +39,32 @@
       (3) Characterize the best estimator and apply it to the given data.</br>
       (4) Check the assumptions in (1).</br>
       (5) If necessary modify model and/or assumptions and go to (1).</br>
+      <strong>Goodness of fit</strong></br>
+      $$\sum_i(y_i-\bar y)^2=\sum_i(y_i-\hat y_i)^2 + \sum_i(\hat y_i-\bar y)^2$$
+      $$\mathrm{TSS}=\mathrm{RSS}+\mathrm{FSS}$$
+      For OLS: \(\bar y=\frac{1}{n}\sum_i y_i=\frac{1}{n}\sum_i \hat y_i\)</br>
+      For regression through the origin: \(\bar y=0\)</br>
+      $$ R^2= \frac{\textrm{FSS}}{\textrm{TSS}}=1-\frac{\textrm{RSS}}{\textrm{TSS}}$$
+      Adjusted R-squared:
+      $$R^2_{\textrm{Adj}} = 1-\frac{\textrm{RSS}/\mathrm{df}_\textrm{R}}{\textrm{TSS}/\mathrm{df}_\textrm{T}}$$
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Least Squares</strong></br>
       minimizes residual sum of square (RSS)</br>
       $$ \mathbf{Y} = \mathbf{X} \beta + \epsilon$$
-      \(\mathbf{X}\): \(n\times p\)data matrix with \(n\) samples and \(p\) features.</br>
+      \(\mathbf{X}\): \(n\times p\) data matrix with \(n\) samples and \(p\) features.</br>
       If intercept is included, the first column is all ones.</br>
       \(\mathbf{Y}\): \(n\times1\) response variable.</br>
-      \(\epsilon\): residual (error) variable with covariance matrix \(\Sigma\).</br>
+      \(\epsilon\): \(n\times1\) residual (error) variable with covariance matrix \(\Sigma\).</br>
       <em>Ordinary Least Squares (OLS)</em>: \(\Sigma=\sigma^2\mathbf{I}\)
       $$ \hat{\beta} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}$$
+      $$ \hat{\mathbf{Y}} = H\mathbf{Y}\;\; \textrm{with}\;\; H=\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$$
+      if \(\mathbf{X}\) contains intercept, then \(H\cdot1=1\).</br>
+      \(H\) is a projection matrix.</br>
+      $$\hat{\sigma}^2 = \frac{1}{n-p}\textrm{RSS}\;\;b.c.\;\;\mathrm{Tr}\{H\}=p$$
       <em>Generalized Least Squares (GLS)</em>:
       $$ \hat{\beta} = (\mathbf{X}^T\Sigma^{-1}\mathbf{X})^{-1}\mathbf{X}^T\Sigma^{-1}\mathbf{Y}$$
+      Can be obtained by transforming to OLS.
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Gauss-Markov Theorem</strong></br>
@@ -63,14 +76,94 @@
       Estimators (BLUE).</br>
       <em>Generalization</em>:</br>
       GLS is still BLUE.</br>
+      <span class='note'>the statistical assumption is on the conditional distribution of \(\mathbf{Y}\)
+        given \(\mathbf{X}\). So when we evaluate expectations, only \(y_i\)'s are random and \(x_i\)'s are
+        treated as given, non-random constants.</span>
+      $$E[\hat{\beta}] = \beta$$
+      $$\mathrm{Var}[\hat{\beta}] = (\mathbf{X}^T\Sigma^{-1}\mathbf{X})^{-1}$$
+      for simple linear regression with \(\mathbf{X}=[1, \mathbf{Z}]\)
+      $$ (\mathbf{X}^T\mathbf{X})^{-1} =
+      \begin{pmatrix}
+      \frac{1}{n}+\bar{Z}S^{-1}\bar{Z}^T & -\bar{Z} S^{-1} \\
+      -S^{-1}\bar{Z}^T & S^{-1}
+      \end{pmatrix}$$
+      \(S=(\mathbf{Z}-1_{n\times1}\bar{Z})^T(\mathbf{Z}-1_{n\times1}\bar{Z})
+      =\mathbf{Z}^T\mathbf{Z}-n\bar{Z}^T\bar{Z}\)</br>
+      \(\bar{Z}=\frac{1}{n}1_{1\times n} \mathbf{Z}\)</br>
     </div>
     <div class="col-3 col-m-4 col-mm-6">
+      <strong>Bias-Variance Tradeoff</strong></br>
+      The bias–variance dilemma or problem is the conflict in trying to simultaneously
+      minimize bias and variance.
+      <figure><img src="figs/bv_tradeoff.png" alt="bias-variance tradeoff"></figure>
+      Bias–variance decomposition of squared error for true data \(y=f(x)+\epsilon(x)\) and model \(\hat f(x)\)
+      $$\begin{split}E[\textrm{err}] & = E[(y-\hat f)^2]\\
+      & = E[(f-\hat f-\epsilon)^2]\\
+      & = E[(f-\hat f)^2] + \mathrm{Var}[\epsilon] \\
+      & = \textrm{Bias}^2 + \mathrm{Var}[\hat f] + \mathrm{Var}[\epsilon]
+      \end{split}$$
+      \(\textrm{Bias}=\hat f - E[\hat f]\)</br>
+      \(\mathrm{Var}[\hat f]=E[(\hat f - E[\hat f])^2] = E[\hat f^2] - E[\hat f]^2\)</br>
+      \(f(x)\) is a numerical function</br>
+      \(\epsilon\) is a random variable with zero mean</br>
+      \(\hat f(x)\) is a random variable independent of \(\epsilon\)</br>
+      $$\mathrm{Var}[f] = E[f^2]-E[f]^2$$
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Checks</strong></br>
+      <em>Confidence (CI) and Prediction (PI) Interval</em></br>
+      Estimation error \(E[(x\beta- x\hat{\beta})^2]\)</br>
+      CI for data \(x\) (a row vector) is given by
+      $$x\hat{\beta}\pm t^{(\alpha/2)}_{n-p} \sqrt{x\mathrm{Var}[\hat{\beta}]x^T}$$
+      Prediction error \(E[(y - x\hat{\beta})^2]\)</br>
+      PI for data \(x\) (a row vector) is given by
+      $$x\hat{\beta} \pm t^{(\alpha/2)}_{n-p}\sqrt{\hat{\sigma}_x^2+x\mathrm{Var}[\hat{\beta}]x^T}$$
+      \(1-\alpha\) confidence that the interval covers the true value.</br>
+      <em>Leverages</em> similar with CI and PI<br>
+      \(h_i=H_{ii}=\frac{1}{n}+(x_i-\bar{Z})S^{-1}(x_i-\bar{Z})^T\)</br>
+      gives a measure of how far the \(i\)-th observation is from the center of the data.</br>
+      \(h_i\in(0,1)\), \(\sum_i h_i=p\), \(h_i=\mathrm{d}\hat y_i / \mathrm{d} y_i\).</br>
+      high leverage: \(h_i>2p/n\)</br>
+      <em>Mahalanobis distance</em> for \(x\) in data \(\mathbf{X}=[1,\mathbf{Z}]\)</br>
+      $$(z-\bar{Z})\hat{\Sigma}^{-1}(z-\bar{Z})^T,\quad \hat{\Sigma}=\frac{1}{n-1}S$$
+      <em>Residuals</em>: \(r=(I-H)\epsilon\)</br>
+      studentized residuals: leave-one-out prediction error.</br>
+      $$t_i = r_i^*\left(\frac{n-p-1}{n-p-(r_i^*)^2}\right)^{1/2}$$
+      standardized residual \(r_i^*=r_i/(\hat{\sigma}\sqrt{1-h_i}\)).</br>
+      <em>Linear Assumption</em>: residual V.S. fitted value plots,</br>
+      Lack-of-t Test: when we have replicates. (will be discussed later)</br>
+      Partial regression plot, partial residual plot</br>
+      <em>constant variance</em>: Breusch-Pagan Test</br>
+      <em>Normality</em>: QQ plot, Kolmogorov-Smirnov test, Shapiro-Wilk test</br>
+      <em>Collinearity</em>: VIF factor (\(\le4\) no collinearity)</br>
+      <em>Outliers</em>: cook's distance</br>
+      <em>error correlation</em>: Durbin-Waston test</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Hypothesis Testing</strong></br>
+      1. Form a test statistic, i.e. a function defined on the data. g(data),
+      which tends to take extreme values under the alternative hypothesis \(H_a\).</br>
+      2. Evaluate the test statistic on the observed data, denoted by \(g_0\).<br>
+      3. Find the distribution of \(g\)(data) when data are generated from \(H_0\),
+      and then calculate \(p\)-value.</br>
+      <em>\(p\)-value</em>: the probability of \(g\)(data) to be more extreme then
+      the observed statistic \(g_0\) under \(H_0\).</br>
+      If \(p\)-value is small, the null hypothesis \(H_0\) is not likely to happen, reject null.</br>
+      <em>t-test</em>
+      \(H_0\): \(\beta_i=c\) V.S. \(H_a\): \(\beta_i\ne c\)</br>
+      $$t=\frac{\hat{\beta}_j -c}{\mathrm{std}(\hat{\beta}_j)}\sim T_{n-p}$$
+      <em>F-test</em> for nested models</br>
+      \(H_0\): \(\beta_2=0\), i.e. \(y=X_1\beta_1+\epsilon\)</br>
+      \(H_a\): \(\beta_2\ne0\), i.e. \(y=X_1\beta_1+X_2\beta_2+\epsilon\)</br>
+      $$F=\frac{(\textrm{RSS}_0-\textrm{RSS}_a)/p_2}{\textrm{RSS}_a/(n-p_1-p_2)}\sim F_{p_2,n-p_1-p_2}$$
+      When \(X_1\) is intercept, the test becomes
+      $$F=\frac{\textrm{FSS}/(p-1)}{\textrm{RSS}/(n-p)}\sim F_{p-1,n-p}$$
     </div>
   </main>
 
   <footer>
     <ul>
-      <li>CS440/ECE448 Artificial Intelligence by <a href="http://slazebni.cs.illinois.edu/"> Svetlana Lazebnik</a>.</li>
+      <li>STAT542 Statistical Learning by <a href="https://publish.illinois.edu/liangf/teaching/stat-542/">Feng Liang</a>.</li>
     </ul>
   </footer>
   </body>

@@ -16,7 +16,7 @@ $(document).ready(function(){
       "<h4>Table of Contents:</h4>" +
       "<ul style='list-style-type:none;margin-left:0;padding-left:0;'>";
 
-  $("main h2, main h3").each(function() {
+  $("main h2, main h3, main h4").each(function() {
     var current = $(this)
     var name = current.text();
     current.attr("id", name)
