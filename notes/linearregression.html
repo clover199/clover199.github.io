@@ -110,7 +110,7 @@
       $$\mathrm{Var}[f] = E[f^2]-E[f]^2$$
     </div>
     <div class="col-3 col-m-4 col-mm-6">
-      <strong>Checks</strong></br>
+      <strong>Diagnostics</strong></br>
       <em>Confidence (CI) and Prediction (PI) Interval</em></br>
       Estimation error \(E[(x\beta- x\hat{\beta})^2]\)</br>
       CI for data \(x\) (a row vector) is given by
@@ -130,14 +130,31 @@
       studentized residuals: leave-one-out prediction error.</br>
       $$t_i = r_i^*\left(\frac{n-p-1}{n-p-(r_i^*)^2}\right)^{1/2}$$
       standardized residual \(r_i^*=r_i/(\hat{\sigma}\sqrt{1-h_i}\)).</br>
-      <em>Linear Assumption</em>: residual V.S. fitted value plots,</br>
-      Lack-of-t Test: when we have replicates. (will be discussed later)</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <em>Linear Assumption</em>: </br>
+      residual V.S. fitted value plots</br>
+      Lack-of-fitt Test: when we have replicates</br>
       Partial regression plot, partial residual plot</br>
-      <em>constant variance</em>: Breusch-Pagan Test</br>
-      <em>Normality</em>: QQ plot, Kolmogorov-Smirnov test, Shapiro-Wilk test</br>
-      <em>Collinearity</em>: VIF factor (\(\le4\) no collinearity)</br>
-      <em>Outliers</em>: cook's distance</br>
-      <em>error correlation</em>: Durbin-Waston test</br>
+      <em>Normality</em>:
+      QQ plot, Kolmogorov-Smirnov test, Shapiro-Wilk test</br>
+      <em>Collinearity</em>: variance inflation factor (VIF)</br>
+      $$ \mathrm{VIF}_i = \frac{1}{1-R^2_i} $$
+      \(R^2_i\) is R-squared of regression without variable \(i\).
+      A rule of thumb VIF>10: high multicollinearity; VIF<4: no multicollinearity</br>
+      <strong>Tests</strong></br>
+      <em>Kolmogorov–Smirnov:</em> quantifies a distance between the empirical
+      distribution functions of two samples.</br>
+      <em>Shapiro–Wilk</em>: test normality</br>
+      <em>Anderson–Darling</em>:test whether a given sample of data is drawn
+      from a given probability distribution</br>
+      <em>Breusch-Pagan</em>: tests whether the variance of the errors from
+      a regression is dependent on the values of the independent variables</br>
+      Use an auxiliary regression \(\hat{\epsilon}^2\sim X\).</br>
+      <em>Durbin-Waston</em>: detect the presence of autocorrelation at
+      lag \(s\) in the residuals.</br>
+      $$ D_s = \frac{\sum_{t=s+1}^T (\epsilon_t - \epsilon_{t-s})^2}{ \sum_{t=1}^T \epsilon_t^2 } $$
+      When the sample size is large \(D_s\sim 2(1 − r_s)\)</br>
     </div>
     <div class="col-3 col-m-4 col-mm-6">
       <strong>Hypothesis Testing</strong></br>
@@ -158,12 +175,27 @@
       $$F=\frac{(\textrm{RSS}_0-\textrm{RSS}_a)/p_2}{\textrm{RSS}_a/(n-p_1-p_2)}\sim F_{p_2,n-p_1-p_2}$$
       When \(X_1\) is intercept, the test becomes
       $$F=\frac{\textrm{FSS}/(p-1)}{\textrm{RSS}/(n-p)}\sim F_{p-1,n-p}$$
+      <strong>Model selection</strong></br>
+      AIC: -2 loglik + 2 \(p\)</br>
+      BIC: -2 loglik + \(p\) log \(n\)</br>
+      Mallow's \(C_p\): \(\frac{\textrm{RSS}}{\hat{\sigma}^2}\) + 2 \(p\) - \(n\)</br>
+      For linear regression, -2 loglik = log RSS</br>
+    </div>
+    <div class="col-3 col-m-4 col-mm-6">
+      <strong>Partial regression plots</strong> \(R_Y^{[i]}\sim R_i\)</br>
+      \(R_Y^{[i]}\) the residuals of \(Y\sim X^{[i]}\)</br>
+      \(R_i\) the residuals of \(X_i\sim X^{[i]}\)</br>
+      \(X^{[i]}\) the independent variables other than variable \(i\)</br>
+      properties of the plot: </br>
+      The linear fit has the slope \(\beta_i\) and intercept zero.</br>
+      The residuals are identical to the original model.</br>
     </div>
   </main>
 
   <footer>
     <ul>
-      <li>STAT542 Statistical Learning by <a href="https://publish.illinois.edu/liangf/teaching/stat-542/">Feng Liang</a>.</li>
+      <li>STAT425 Applied Regression and Design by
+        <a href="https://publish.illinois.edu/liangf/teaching/stat-425/">Feng Liang</a>.</li>
     </ul>
   </footer>
   </body>

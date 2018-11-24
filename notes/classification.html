@@ -77,7 +77,7 @@
       where \(\eta(x,\beta)=1/\left(1+e^{-\beta x}\right)\)</br>
       The MLE can be obtained by <em>Reweighted LS Algorithm</em>:</br>
       1. With given \(\beta\) calculate weight $$W = \mathrm{diag}\left[\eta(1-\eta)\right]$$
-      2. Calculate target value $$z=x\beta-W^{-1}(y-\eta)$$
+      2. Calculate target value $$z=x\beta+W^{-1}(y-\eta)$$
       3. Replace \(\beta\) by estimator from weighted least square
       $$\beta = \left(x^tWx\right)^{-1}x^tW z $$
       <span class="note">When data are well separated, add penalty term (Lasso) to get convergence.</span>
